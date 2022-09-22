@@ -15,9 +15,11 @@ Including another URLconf
 """
 from wsgiref.simple_server import demo_app
 from django.contrib import admin
-from django.urls import path,include
-
+from django.urls import path,include,re_path
+from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('demo/',include('demo.urls'))
+    path('demo/',include('demo.urls')),
+    re_path(r'^$',TemplateView.as_view(template_name="index.html")),
+    #path('assets/',)
 ]
