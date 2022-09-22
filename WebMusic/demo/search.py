@@ -108,15 +108,14 @@ def valid_url(url):
     return len(url) > 10
 # 方法入口
 
-if __name__ == '__main__':
-    song_name = input('请输入歌曲名称，按回车键搜索：')
+def geturl(song_name):
     d = {"csrf_token": "", "hlpretag": "<span class=\"s-fc7\">", "hlposttag": "</span>", "s": song_name, "type": "1", "offset": "0",
          "total": "true", "limit": "30"}
     d = json.dumps(d)
     random_param = get_random()
     param = get_final_param(d, random_param)
     song_list = get_music_list(param['params'], param['encSecKey'])
-    print('搜索结果如下：')
+    #print('搜索结果如下：')
     url_list = []
     if len(song_list) > 0:
         song_list = json.loads(song_list)['result']['songs']
@@ -124,7 +123,7 @@ if __name__ == '__main__':
             if len(url_list) > 5:
                 break
             item = json.dumps(item)
-            print(str(i+1) + "：" + json.loads(str(item))['name'])
+            #print(str(i+1) + "：" + json.loads(str(item))['name'])
             d = {"ids": "[" + str(json.loads(str(item))['id']) + "]", "level": "standard", "encodeType": "",
                  "csrf_token": ""}
             d = json.dumps(d)
@@ -133,10 +132,7 @@ if __name__ == '__main__':
             if len(song_info) > 0:
                 song_info = json.loads(song_info)
                 song_url = json.dumps(song_info['data'][0]['url'], ensure_ascii=False)
-                print(song_url)
+                #print(song_url)
                 if valid_url(song_url):
                     url_list.append(song_url)
-            else:
-                print("该首歌曲解析失败，可能是因为歌曲格式问题")
-    else:
-        print("很抱歉，未能搜索到相关歌曲信息")
+    return url_list
