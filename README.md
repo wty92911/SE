@@ -5,7 +5,9 @@
 
 ## 技术架构
 
+
 - 本项目基于django@latest、vue@latest、mysql实现
+
 
 ## 小组分工
 
@@ -17,6 +19,7 @@
 - python3.10
 - django@latest
 - 一些python依赖包
+
 
 ## 项目规划
 - ### 核心需求
@@ -33,3 +36,4 @@
 - ### 分工汇报
 
   - 
+
