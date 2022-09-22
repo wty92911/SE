@@ -5,13 +5,18 @@
 
 ## 技术架构
 
-- 项目基于django实现 
+- 后端基于django@latest，前端基于vue@latest实现
 
 ## 小组分工
 
-- UI设计
-- 前端
-- 后端
-- 数据处理
+- UI设计 前端 zyn lyz lxz
+- 后端  zjr ddy jyt
+- 数据处理 wty zx
+
 ## 环境准备
-- 音乐资源使用爬虫获取网易云音乐链接
+- python3.10
+- django@latest
+- 一些python依赖包
+
+## 项目设计
+- 
