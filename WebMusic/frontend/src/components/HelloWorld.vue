@@ -15,6 +15,7 @@
       (res) =>{
         console.log(res);
         urllist.value = res.data.list;
+        
       }
     )
   }
@@ -29,13 +30,13 @@
         <el-button type="primary" @click="find">查询</el-button>
       </el-row>
       <el-row>
-  <el-table :data="urllist" style="width: 100%" >
-  <el-table-column prop="url" label="url" min-width="100">
-    <template v-slot="scope">
-    {{scope.row.fields.url}}
-    </template>
-  </el-table-column>
-  </el-table>
+        <el-table :data="urllist" style="width: 100%" >
+        <el-table-column prop="url" label="url" min-width="100">
+          <template v-slot="scope">
+          {{scope.row.fields.url}}
+          </template>
+        </el-table-column>
+        </el-table>
       </el-row>
       </h3>
     </div>
