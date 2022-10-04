@@ -14,9 +14,14 @@ def getMusic(request):
     print(request.body)
     dt = json.loads(request.body)
     name = dt['musicname']
+    id_list = crawler.get_ID(name)
     res = {}
-    res['musicUrl'] = crawler.get_Music_url(name)
-    print(get_Music_url('the show'))
+    res['music'] = [{
+                    'id':id,
+                    'name':crawler.get_Music_name(id),
+                    'artists':crawler.get_artists_name(id),
+                    'url':crawler.get_Music_url(id)
+                    } for id in id_list]
     return JsonResponse(res)
 
 #print(get_Music_url('the show'))
