@@ -1,6 +1,6 @@
 <script setup>
   import {ref,onMounted} from 'vue'
-  import {search} from '../api/api.js'
+  import {searchMusic} from '../api/api.js'
   defineProps({
     msg: {
       type: String,
@@ -11,10 +11,10 @@
   const str = ref('')
   const urllist = ref([])
   function find(){
-    search(str.value).then(
+    searchMusic(str.value).then(
       (res) =>{
         console.log(res);
-        urllist.value = res.data.list;
+        urllist.value = res.data.musicUrl;
         
       }
     )
