@@ -9,6 +9,7 @@
 <template>
     <div>
         <img class="background" src="../assets/HomePage/页面上方底色.png" />
+        <!--TODO:change the background to an opaque picture><!-->
         <img class="shade" src="../assets/HomePage/阴影.png"/>
         <img class="logo" src="../assets/HomePage/logo.png" />
         <img class="title" src="../assets/HomePage/WebMusic.png" />
