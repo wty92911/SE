@@ -5,13 +5,11 @@
   function searchMusic(){
     console.log(musicName);
   }
-  function change(e){
-    this.$forceUpdate()
-  }
 </script>
 <template>
     <div>
         <img class="background" src="../assets/HomePage/页面上方底色.png" />
+        <!--TODO:change the background to an opaque picture><!-->
         <img class="shade" src="../assets/HomePage/阴影.png"/>
         <img class="logo" src="../assets/HomePage/logo.png" />
         <img class="title" src="../assets/HomePage/WebMusic.png" />
@@ -24,7 +22,9 @@
 </template>
 
 <style scoped>
+
 .logo{
+    z-index: 100;
     left: 100px;
     top: 30px;
     width: 150px;
@@ -33,6 +33,7 @@
     position: fixed;
 }
 .title{
+    z-index: 100;
     left: 250px;
     top: 90px;
     width: 180px;
@@ -44,17 +45,16 @@
     position: fixed;
 }
 .background{
+    z-index: 100;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 203px;
-    line-height: 20px;
-    background-color: rgba(180, 253, 255, 0.25);
-    text-align: center;
-    border: 1px solid rgba(187, 187, 187, 1);
+    background-color: rgb(255, 255, 255);
     position: fixed;
 }
 .shade{
+    z-index: 100;
     left: 0px;
     top: 201px;
     width: 100%;
@@ -62,6 +62,7 @@
     position: fixed;
 }
 .searchFrame{
+    z-index: 100;
     left: 280px;
     top: -155px;
     width: 817px;
@@ -69,6 +70,7 @@
     position: fixed;
 }
 .searchInput{
+    z-index: 100;
     left: 527px;
     top: 95px;
     width: 295px;
@@ -82,6 +84,7 @@
     position: fixed;
 }
 .searchIcon{
+    z-index: 100;
     left: 862px;
     top: 95px;
     width: 33px;
@@ -89,6 +92,7 @@
     position: fixed;
 }
 .avatar{
+    z-index: 100;
     left: 1370px;
     top: 55px;
     width: 100px;
@@ -98,6 +102,7 @@
     position: fixed;
 }
 .signin{
+    z-index: 100;
     left: 1160px;
     top: 82px;
     width: 172px;
@@ -105,7 +110,6 @@
     line-height: 20px;
     background-color: rgba(255, 255, 255, 1);
     text-align: center;
-    border: 1px solid rgba(187, 187, 187, 1);
     position: fixed;
 }
 @media (min-width: 1440px) {
