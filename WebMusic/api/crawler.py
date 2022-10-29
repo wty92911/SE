@@ -147,3 +147,11 @@ def get_Music_url(id):
     player_url = dict_r['data'][0]['url']
     return player_url
 
+def get_Hotlist():#return 4 id
+    url = "http://music.163.com/discover/toplist?id=3778678"
+    r = rs.get(url, headers=get_headers())
+    r.encoding = 'utf-8'
+    str_r = r.text
+    pat3 = r'<li><a href="/song\?id=(\d*?)">.*?</a></li>'
+    hot_song_id = re.compile(pat3).findall(r.text)
+    return hot_song_id[0:8]
