@@ -1,15 +1,14 @@
 <script setup>
   import HelloWorld from './components/HelloWorld.vue'
   import PageHeader from './components/PageHeader.vue'
-  import Recommendations from './components/Recommendations.vue'
+  import Search_results from './components/Search_results.vue'
   import Song from './components/Song.vue'
-  import PG_NUM from './components/PG_NUM.vue'
 </script>
   
 <template>
   <div>
     <PageHeader />
-      <Recommendations>
+      <search_results>
         <template #song1>
           <Song>
             <template #cover>
@@ -77,7 +76,7 @@
             </template>
           </PG_NUM>
         </template>
-      </Recommendations>
+      </search_results>
     </div>
 </template>
   
