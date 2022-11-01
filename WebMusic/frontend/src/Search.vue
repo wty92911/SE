@@ -1,21 +1,21 @@
 <script setup>
   import HelloWorld from './components/HelloWorld.vue'
   import PageHeader from './components/PageHeader.vue'
-  import Search_results from './components/Search_results.vue'
+  import SearchResults from './components/SearchResults.vue'
   import Song from './components/Song.vue'
 </script>
   
 <template>
   <div>
     <PageHeader />
-      <search_results>
+      <SearchResults>
         <template #song1>
           <Song>
             <template #cover>
               <img src="./assets/Search/歌曲封面.png" />
             </template>
             <template #title>
-              {{hotname5}}
+              歌曲名1
             </template>
           </Song>
         </template>
@@ -25,7 +25,7 @@
               <img src="./assets/Search/歌曲封面.png" />
             </template>
             <template #title>
-              {{hotname6}}
+              歌曲名2
             </template>
           </Song>
         </template>
@@ -35,7 +35,7 @@
               <img src="./assets/Search/歌曲封面.png" />
             </template>
             <template #title>
-              {{hotname7}}
+              歌曲名3
             </template>
           </Song>
         </template>
@@ -45,7 +45,7 @@
               <img src="./assets/Search/歌曲封面.png" />
             </template>
             <template #title>
-              {{hotname8}}
+              歌曲名4
             </template>
           </Song>
         </template>
@@ -70,13 +70,8 @@
           </Song>
         </template>
         <template #pg_cover1>
-          <PG_NUM>
-            <template #pg_cover>
-              <img src="./assets/Search/分页图.png" />
-            </template>
-          </PG_NUM>
         </template>
-      </search_results>
+      </SearchResults>
     </div>
 </template>
   

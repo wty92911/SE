@@ -7,7 +7,7 @@ export default{
     },
     methods:{
         searchMusic(){
-            this.$router.push('/Play');
+            this.$router.push('/Search');
             console.log(this.$router);
         }
     },
