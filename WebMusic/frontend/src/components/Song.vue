@@ -25,7 +25,7 @@
     width: 160px;
     height: 49px;
     color: rgba(16, 16, 16, 1);
-    font-size: 28px;
+    font-size: 22px;
     text-align: left;
     font-family: SourceHanSansSC-regular;
     position: absolute;

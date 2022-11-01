@@ -1,13 +1,21 @@
-<script setup>
-  import {ref} from 'vue'
-  import HelloWorld from '../components/HelloWorld.vue';
-  let musicName = ref('')
-  function searchMusic(){
-    console.log(musicName);
-  }
+<script>
+export default{
+    data(){
+        return {
+            musicName : '',
+        }
+    },
+    methods:{
+        searchMusic(){
+            this.$router.push('/Play');
+            console.log(this.$router);
+        }
+    },
+}
 </script>
 <template>
-    <div>
+   
+    <div> 
         <img class="background" src="../assets/HomePage/页面上方底色.png" />
         <!--TODO:change the background to an opaque picture><!-->
         <img class="shade" src="../assets/HomePage/阴影.png"/>
@@ -18,7 +26,8 @@
         <input class="searchInput" type = "text" v-model="musicName" placeholder="请输入歌曲名">
         <img class="avatar" src="../assets/HomePage/头像.png" />
         <img class="signin" src="../assets/HomePage/登录注册.png" />
-    </div>  
+    </div> 
+
 </template>
 
 <style scoped>
