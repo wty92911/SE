@@ -25,7 +25,7 @@
 </template>
 <style scoped>
 .song1{
-    padding-left: 200px;
+    padding-left: 300px;
     padding-top: 300px;
     width: 160px;
     height: 160px;
@@ -34,7 +34,7 @@
     position: absolute;
 }
 .song2{
-    padding-left: 600px;
+    padding-left: 700px;
     padding-top: 300px;
     width: 160px;
     height: 160px;
@@ -43,7 +43,7 @@
     position: absolute;
 }
 .song3{
-    padding-left: 1000px;
+    padding-left: 1100px;
     padding-top: 300px;
     width: 160px;
     height: 160px;
@@ -52,7 +52,7 @@
     position: absolute;
 }
 .song4{
-    padding-left: 200px;
+    padding-left: 300px;
     padding-top: 600px;
     width: 160px;
     height: 160px;
@@ -61,7 +61,7 @@
     position: absolute;
 }
 .song5{
-    padding-left: 600px;
+    padding-left: 700px;
     padding-top: 600px;
     width: 160px;
     height: 160px;
@@ -70,7 +70,7 @@
     position: absolute;
 }
 .song6{
-    padding-left: 1000px;
+    padding-left: 1100px;
     padding-top: 600px;
     width: 160px;
     height: 160px;
