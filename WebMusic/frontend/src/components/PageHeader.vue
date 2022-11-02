@@ -1,4 +1,5 @@
 <script>
+
 export default{
     data(){
         return {
@@ -7,8 +8,7 @@ export default{
     },
     methods:{
         searchMusic(){
-            this.$router.push('/Play');
-            console.log(this.$router);
+            this.$router.push({name:'Search',query:{musicName: this.musicName}})
         }
     },
 }

@@ -3,6 +3,7 @@ import Axios from "axios"
 const axiosInstance = Axios.create({
     withCredentials: false,
     baseURL : 'http://127.0.0.1:8000/api/',
+   // baseURL : 'http://47.94.92.103:80/api',
 });
 
 // 通过拦截器处理csrf问题，这里的正则和匹配下标可能需要根据实际情况小改动
