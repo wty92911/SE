@@ -73,14 +73,14 @@ def get_hotcomments(id):
     return comments
 
 def get_ID(name):#返回五个搜索条目
-    url = 'https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s={'+str(name)+'}&type=1&offset=0&total=true&limit=5'
+    url = 'https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s={'+str(name)+'}&type=1&offset=0&total=true&limit=6'
     r = rs.get(url, headers=get_headers())
     r.encoding = 'utf-8'
     str_r=r.text
     dict_r = json.loads(str_r)
     #print(dict_r)
     #print(dict_r["result"]['songs'][0]['id'])
-    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,5)]
+    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,6)]
     #print(dict_r["result"]['songs'][0]['artists'][0]['name'])
     return ID
 
