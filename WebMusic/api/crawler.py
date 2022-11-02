@@ -80,7 +80,7 @@ def get_ID(name):#返回五个搜索条目
     dict_r = json.loads(str_r)
     #print(dict_r)
     #print(dict_r["result"]['songs'][0]['id'])
-    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,5)]
+    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,6)]
     #print(dict_r["result"]['songs'][0]['artists'][0]['name'])
     return ID
 
