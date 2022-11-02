@@ -20,7 +20,8 @@ def getMusic(request):
                     'id':id,
                     'name':crawler.get_Music_name(id),
                     'artists':crawler.get_artists_name(id),
-                    'url':crawler.get_Music_url(id)
+                    'url':crawler.get_Music_url(id),
+                    'pic_url':crawler.get_pic_url(id),
                     } for id in id_list]
     return JsonResponse(res)
 
@@ -34,7 +35,7 @@ def getHotlist(request):
                     'name':crawler.get_Music_name(id),
                     'artists':crawler.get_artists_name(id),
                     'url':crawler.get_Music_url(id),
-                    'pic_url':crawler.get_pic_url(id)
+                    'pic_url':crawler.get_pic_url(id),
                     } for id in id_list]
     print(res['music'])
     return JsonResponse(res)
