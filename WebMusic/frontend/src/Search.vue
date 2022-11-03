@@ -50,18 +50,23 @@
             this.name4 = res.data.music[3].name;
             this.name5 = res.data.music[4].name;
             this.name6 = res.data.music[5].name;
-            this.artist1 = res.data.music[0].artists;
-            this.artist2 = res.data.music[1].artists;
-            this.artist3 = res.data.music[2].artists;
-            this.artist4 = res.data.music[3].artists;
-            this.artist5 = res.data.music[4].artists;
-            this.artist6 = res.data.music[5].artists;
+            this.artist1 = res.data.music[0].artists[0];
+            this.artist2 = res.data.music[1].artists[0];
+            this.artist3 = res.data.music[2].artists[0];
+            this.artist4 = res.data.music[3].artists[0];
+            this.artist5 = res.data.music[4].artists[0];
+            this.artist6 = res.data.music[5].artists[0];
           }
         )
       }
     },
     mounted:function(){
       this.getsearch();
+    },
+    watch:{
+      $route:function(){
+        this.getsearch();
+      }
     }
   }
 
@@ -77,7 +82,8 @@
               <img :src="img1" class ="cover"/>
             </template>
             <template #title>
-              {{name1 , artist1}}
+              {{name1}}
+              <p>{{artist1}}</p>
             </template>
           </Song>
         </template>
@@ -87,7 +93,8 @@
               <img :src="img2" class ="cover"/>
             </template>
             <template #title>
-              {{name2 , artist2}}
+              {{name2}} 
+             <p> {{artist2}}</p>
             </template>
           </Song>
         </template>
@@ -97,7 +104,8 @@
               <img :src="img3" class ="cover"/>
             </template>
             <template #title>
-              {{name3 , artist3}}
+              {{name3}} 
+             <p> {{artist3}}</p>
             </template>
           </Song>
         </template>
@@ -107,7 +115,8 @@
               <img :src="img4" class ="cover"/>
             </template>
             <template #title>
-              {{name4 , artist4}}
+              {{name4}} 
+             <p> {{artist4}}</p>
             </template>
           </Song>
         </template>
@@ -117,7 +126,8 @@
               <img :src="img5" class ="cover"/>
             </template>
             <template #title>
-              {{name5 , artist5}}
+              {{name5}} 
+             <p> {{artist5}}</p>
             </template>
           </Song>
         </template>
@@ -127,7 +137,8 @@
               <img :src="img6" class ="cover"/>
             </template>
             <template #title>
-              {{name6 , artist6}}
+              {{name6}} 
+              <p>{{artist6}}</p>
             </template>
           </Song>
         </template>
