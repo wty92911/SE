@@ -4,11 +4,13 @@ import PageHeader from './PageHeader.vue'
 import Recommendations from './Recommendations.vue'
 import Song from './Song.vue'
 import {getHotlist} from '../api/api.js'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 export default{
     components:{
       PageHeader,
       Recommendations,
       Song,
+      FontAwesomeIcon,
     },
     data(){
         return{
@@ -61,7 +63,7 @@ export default{
 }
 </script>
 <template>
-
+  
   <div>
     
     <div class="likesHots">
