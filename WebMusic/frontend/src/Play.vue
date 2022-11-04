@@ -1,6 +1,26 @@
-<script setup>
-  import Animation from './components/Animation.vue'
-
+<script>
+import Animation from './components/Animation.vue'
+export default{
+    components:{
+      Animation,
+    },
+    data(){
+        return{
+            musicId: '',
+            cover: '',
+            playUrl: '',
+        }
+    },
+    methods:{
+        
+    },
+    mounted:function(){
+        console.log(this.$route.query.id);
+        this.musicId = this.$route.query.id;
+        this.cover = this.$route.query.cover;
+        this.playUrl = this.$route.query.playUrl;
+    }
+}
 </script>
   
 <template>
@@ -18,7 +38,7 @@
     <div class="rightWave">
         <Animation />
     </div>
-    <img class="cover" src="./assets/播放/专辑封面.png" />
+    <img class="cover" :src="cover" />
     <div class="lyric">
     </div>
     <div class="circleButtonLike">
