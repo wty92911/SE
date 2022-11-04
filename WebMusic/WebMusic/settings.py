@@ -106,8 +106,12 @@ WSGI_APPLICATION = 'WebMusic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Users', # 数据库
+        'HOST' : '47.94.92.103',
+        'PORT' : 3306,
+        'USER':'remote',
+        'PASSWORD':'remote'  #密码
     }
 }
 
