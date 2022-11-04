@@ -7,10 +7,22 @@ import {createRouter,createWebHashHistory} from 'vue-router'
 import Play from './Play.vue'
 import Like from './components/LikesHots.vue'
 import Search from './Search.vue'
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeLow}   from '@fortawesome/free-solid-svg-icons'
+/* add icons to the library */
+library.add(faUserSecret,faVolumeLow)
+
 const Player = {template : '<div>Play</div>'}
-const app = createApp(App).use(VueAxios,Axios)
+const app = createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(VueAxios,Axios)
 const routes = [
-    {path :"/LikesHots",name:"LikesHots",component: Like},
+    {path :"/LikesHots",name:"LikesHots",component: Like}, 
     {path :"/Search",name:"Search",component: Search},
 ]
 const router = createRouter({
