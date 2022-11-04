@@ -44,8 +44,8 @@
     position: absolute;
 }
 .song1{
-    padding-left: 138px;
-    padding-top: 99px;
+    left: 138px;
+    top: 99px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -53,8 +53,8 @@
     position: absolute;
 }
 .song2{
-    padding-left: 398px;
-    padding-top: 99px;
+    left: 398px;
+    top: 99px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -62,8 +62,8 @@
     position: absolute;
 }
 .song3{
-    padding-left: 138px;
-    padding-top: 398px;
+    left: 138px;
+    top: 398px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -71,8 +71,8 @@
     position: absolute;
 }
 .song4{
-    padding-left: 398px;
-    padding-top: 398px;
+    left: 398px;
+    top: 398px;
     width: 160px;
     height: 160px;
     line-height: 20px;
