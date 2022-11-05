@@ -28,9 +28,11 @@ export default{
           if(res.data.auth == true){
             this.$parent.userName = res.data.userName;
           }else{
-            this.$parent.userName = '未登录';
+            this.$parent.userName = 'SignIn';
           }
-          alert(this.msg)
+          alert(this.msg);
+          this.usr = '';
+          this.pwd = '';
           this.close();
         }
       )
