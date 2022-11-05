@@ -1,18 +1,22 @@
 <script>
 import Sign_in from '../Sign_in.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { treeEmits } from 'element-plus/es/components/tree-v2/src/virtual-tree';
 
 export default{
     data() {
         return {
             musicName: "",
             showSignIn : true,
-            userName : '',
+            userName : 'SignIn',
         };
     },
     methods: {
         searchMusic() {
             this.$router.push({ name: "Search", query: { musicName: this.musicName } });
+        },
+        showsign(){
+            this.showSignIn = true;
         }
     },
     components: { 
@@ -33,8 +37,8 @@ export default{
         <img class="searchIcon" @click="searchMusic" src="../assets/HomePage/搜索图标.png" />
         <input class="searchInput" type = "text" v-model="musicName" placeholder="请输入歌曲名">
         <img class="avatar" src="../assets/HomePage/头像.png" />
-        <div class ="signin">
-            LOGIN 
+        <div class ="signin" @click="showsign">
+            SignIn
         </div>
         <!--修改登录注册 美观点-->
     </div> 

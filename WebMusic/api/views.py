@@ -87,6 +87,7 @@ def mySignUp(request):
             user = models.User.objects.get(name = user_name)
             res['auth'] = False
             res['message'] = 'repeated username'
+            return JsonResponse(res)
         except:
             res['auth'] = True
             res['message'] = 'Welcome to WebMusic'
