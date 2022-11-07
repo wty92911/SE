@@ -7,9 +7,11 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "@moefe/vue-aplayer": "^2.0.0-beta.5",
     "axios": "^0.27.2",
     "element-plus": "^2.2.17",
     "vue": "^3.2.38",
+    "vue-aplayer": "^1.6.1",
     "vue-axios": "^3.4.1"
   },
   "devDependencies": {
