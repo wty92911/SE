@@ -7,8 +7,8 @@ export default{
     data() {
         return {
             musicName: "",
-            showSignIn : true,
-            userName : 'SignIn',
+            showSignIn : false,
+            userName : '登录',
         };
     },
     methods: {
@@ -28,17 +28,19 @@ export default{
 <template>
     <Sign_in :showSignIn="showSignIn" userName="userName"></Sign_in>
     <div> 
-        <img class="background" src="../assets/HomePage/页面上方底色.png" />
+        <div class = "shade">
+            <img class="background" src="../assets/HomePage/background.jpg" />
+        </div>
+        
         <!--TODO:change the background to an opaque picture><!-->
-        <img class="shade" src="../assets/HomePage/阴影.png"/>
+       
         <img class="logo" src="../assets/HomePage/logo.png" />
         <img class="title" src="../assets/HomePage/WebMusic.png" />
         <img class="searchFrame" src="../assets/HomePage/输入外框.png" />
         <img class="searchIcon" @click="searchMusic" src="../assets/HomePage/搜索图标.png" />
         <input class="searchInput" type = "text" v-model="musicName" placeholder="请输入歌曲名">
-        <img class="avatar" src="../assets/HomePage/头像.png" />
         <div class ="signin" @click="showsign">
-            SignIn
+            {{userName}}
         </div>
         <!--修改登录注册 美观点-->
     </div> 
@@ -69,21 +71,32 @@ export default{
     position: fixed;
 }
 .background{
-    z-index: 100;
+    z-index: 99;
     left: 0px;
     top: 0px;
     width: 100%;
-    height: 203px;
+    
+    opacity: 0.9;
     background-color: rgb(255, 255, 255);
     position: fixed;
 }
 .shade{
     z-index: 100;
-    left: 0px;
-    top: 201px;
+    height: 100%;
+    font-family: JetBrains Mono Medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #0e92b3; */
+    background-color: rgba(0, 10, 14, 0.532);
+    background-size: 100% 100%;
     width: 100%;
-    height: 19px;
+    height: 100%;
     position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 .searchFrame{
     z-index: 100;
@@ -135,7 +148,9 @@ export default{
     position: fixed;
     font-size: 40px;
     border-radius: 20px;
-    border: 2px solid #0e92b3;
+    border: 1px solid #d3e7ec75;
+    font-style: normal;
+    color: rgb(44, 40, 40);
     
 }
 </style>

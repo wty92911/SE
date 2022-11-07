@@ -63,6 +63,7 @@ def mySignIn(request):
         if user.password == pass_word:
             res['auth'] = True
             res['message'] = 'welcome to WebMusic'
+            res['username'] = user_name
             return JsonResponse(res)
         else:
             res['auth'] = False
@@ -95,6 +96,7 @@ def mySignUp(request):
             user.name = user_name
             user.password = pass_word
             user.save()
+            res['username'] = user_name
             return JsonResponse(res)
     res['auth'] = False
     res['message'] = 'error username or password'

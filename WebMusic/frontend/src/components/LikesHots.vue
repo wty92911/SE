@@ -26,7 +26,7 @@ export default{
                   this.hot.push(res.data.music[i]);
                 }
             }*/
-            this.hot.push({'id': '865632948', 'name': '若把你', 'artists': ['Kirsty刘瑾睿'], 'url': 'http://m10.music.126.net/20221104152955/4404e7c4165737d561cd4b59498cf26c/ymusic/a70a/34c7/cd7d/4694c0a88465af96706ea994c41a25e2.mp3', 'pic_url': 'http://p2.music.126.net/M877M2-VhWZiLPVFORf9iQ==/109951163401482434.jpg'});
+            this.hot.push({'id': '865632948', 'name': '若把你', 'artists': ['Kirsty刘瑾睿'], 'url': 'http://music.163.com/song/media/outer/url?id=865632948.mp3', 'pic_url': 'http://p2.music.126.net/M877M2-VhWZiLPVFORf9iQ==/109951163401482434.jpg'});
         },
         playMusic(index){
          
@@ -156,12 +156,12 @@ export default{
   
 <style scoped>  
 .accordingToPreferences{
-  z-index: 0;
+  z-index: 101;
   top: 243px;
   position: absolute;
 } 
 .hotList{
-  z-index: 0;
+  z-index: 101;
   top: 243px;
   left: 798px;
   position: absolute;

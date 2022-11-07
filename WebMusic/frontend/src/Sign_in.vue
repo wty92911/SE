@@ -25,10 +25,11 @@ export default{
       mySignIn(this.usr,this.pwd).then(
         (res)=>{
           this.msg = res.data.message;
+          console.log(res.data);
           if(res.data.auth == true){
-            this.$parent.userName = res.data.userName;
+            this.$parent.userName = res.data.username;
           }else{
-            this.$parent.userName = 'SignIn';
+            this.$parent.userName = '登录';
           }
           alert(this.msg);
           this.usr = '';
@@ -80,7 +81,7 @@ export default{
  
 <style scoped>
 .login-wrap {
-  z-index: 101;
+  z-index: 102;
   height: 100%;
   font-family: JetBrains Mono Medium;
   display: flex;
