@@ -13,13 +13,6 @@ export default{
             playUrl: '',
             likeshow:true,
             starshow:true,
-            audio: {
-                name: '东西（Cover：林俊呈）',
-                artist: '纳豆',
-                url: 'https://cdn.moefe.org/music/mp3/thing.mp3',
-                cover: 'https://p1.music.126.net/5zs7IvmLv7KahY3BFzUmrg==/109951163635241613.jpg?param=300y300', // prettier-ignore
-                lrc: 'https://cdn.moefe.org/music/lrc/thing.lrc',
-            },
         }
         
     },
@@ -32,12 +25,12 @@ export default{
         }
     },
     mounted:function(){
-        console.log(this.playUrl);
-        console.log(this.$route.query.id);
+       
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
-        this.audio.url = this.playUrl;
+        console.log(this.playUrl);
+        console.log(this.$route.query.id);
     }
 }
 </script>
@@ -73,9 +66,7 @@ export default{
     </div>
     <div class="player">
         <audio :src="playUrl" controls="controls"></audio>
-       
     </div>
-    <aplayer :audio="audio" :lrcType="3" />
   </div>
 </template>
   

@@ -19,14 +19,14 @@ export default{
     },
     methods:{
         gethot(){
-            /*getHotlist().then(
+            getHotlist().then(
             (res) =>{
                 console.log(res);
                 for(let i = 0; i < 8; i = i + 1){
                   this.hot.push(res.data.music[i]);
                 }
-            }*/
-            this.hot.push({'id': '865632948', 'name': '若把你', 'artists': ['Kirsty刘瑾睿'], 'url': 'http://music.163.com/song/media/outer/url?id=865632948.mp3', 'pic_url': 'http://p2.music.126.net/M877M2-VhWZiLPVFORf9iQ==/109951163401482434.jpg'});
+            })
+            //this.hot.push({'id': '865632948', 'name': '若把你', 'artists': ['Kirsty刘瑾睿'], 'url': 'http://music.163.com/song/media/outer/url?id=865632948.mp3', 'pic_url': 'http://p2.music.126.net/M877M2-VhWZiLPVFORf9iQ==/109951163401482434.jpg'});
         },
         playMusic(index){
          
@@ -48,7 +48,7 @@ export default{
       <Recommendations>
         <template #title>猜你喜欢</template>
         <template #song1>
-          <div v-if="index==0" @click="playMusic(0)">
+          <div v-if="index==4" @click="playMusic(4)">
               <Song>
                 <template #cover>                  
                   <img :src="song.pic_url" class ="cover"/>
@@ -60,7 +60,7 @@ export default{
           </div>
         </template>
         <template #song2>
-          <div v-if="index==5">
+          <div v-if="index==5" @click="playMusic(5)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover"/>
@@ -72,7 +72,7 @@ export default{
           </div>
         </template>
         <template #song3>
-          <div v-if="index==6">
+          <div v-if="index==6" @click="playMusic(6)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />
@@ -84,7 +84,7 @@ export default{
           </div>
         </template>
         <template #song4>
-          <div v-if="index==7">
+          <div v-if="index==7" @click="playMusic(7)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />
@@ -101,7 +101,7 @@ export default{
       <Recommendations>
         <template #title>当下热门</template>
         <template #song1>
-          <div v-if="index==0">
+          <div v-if="index==0" @click="playMusic(0)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />
@@ -113,7 +113,7 @@ export default{
           </div>
         </template>
         <template #song2>
-          <div v-if="index==1">
+          <div v-if="index==1" @click="playMusic(1)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />
@@ -125,7 +125,7 @@ export default{
           </div>
         </template>
         <template #song3>
-          <div v-if="index==2">
+          <div v-if="index==2" @click="playMusic(2)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />
@@ -137,7 +137,7 @@ export default{
           </div>
         </template>
         <template #song4>
-          <div v-if="index==3">
+          <div v-if="index==3" @click="playMusic(3)">
             <Song>
               <template #cover>
                 <img :src="song.pic_url" class ="cover" />

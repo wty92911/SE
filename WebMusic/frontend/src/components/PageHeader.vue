@@ -36,8 +36,7 @@ export default{
        
         <img class="logo" src="../assets/HomePage/logo.png" />
         <img class="title" src="../assets/HomePage/WebMusic.png" />
-        <img class="searchFrame" src="../assets/HomePage/输入外框.png" />
-        <img class="searchIcon" @click="searchMusic" src="../assets/HomePage/搜索图标.png" />
+        <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="searchIcon" @click="searchMusic"/>
         <input class="searchInput" type = "text" v-model="musicName" placeholder="请输入歌曲名">
         <div class ="signin" @click="showsign">
             {{userName}}
@@ -98,14 +97,6 @@ export default{
     bottom: 0;
     left: 0;
 }
-.searchFrame{
-    z-index: 100;
-    left: 280px;
-    top: -155px;
-    width: 817px;
-    height: 817px;
-    position: fixed;
-}
 .searchInput{
     z-index: 100;
     left: 527px;
@@ -113,12 +104,17 @@ export default{
     width: 295px;
     height: 28px;
     color: rgba(136, 136, 136, 1);
-    font-size: 28px;
+    background-color: rgba(32, 74, 102, 0);
+    font-size: 25px;
     text-align: left;
     font-family: Microsoft Yahei;
     outline: none;
     border: 0;
+    outline:none;
     position: fixed;
+    border: 1px solid #d3e7ec75;
+    border-radius: 30px;
+
 }
 .searchIcon{
     z-index: 100;
@@ -128,28 +124,19 @@ export default{
     height: 33px;
     position: fixed;
 }
-.avatar{
-    z-index: 100;
-    left: 1370px;
-    top: 55px;
-    width: 100px;
-    height: 100px;
-    line-height: 20px;
-    text-align: center;
-    position: fixed;
-}
 .signin{
-    z-index: 101;
+    z-index: 100;
     left: 1160px;
     top: 82px;
     width: 100px;
     height: 50px;
     text-align: center;
     position: fixed;
-    font-size: 40px;
+    font-size: 30px;
     border-radius: 20px;
     border: 1px solid #d3e7ec75;
     font-style: normal;
+    font-family: Microsoft Yahei;
     color: rgb(44, 40, 40);
     
 }
