@@ -12,9 +12,12 @@ from django.contrib.auth import authenticate,login
 import json
 # Create your views here.
 ##
+mp = {}
 @require_http_methods(["GET","POST"])
 def getMusic(request):
     print(request.body)
+    if request.body in mp:
+        return mp[request.body]
     dt = json.loads(request.body)
     name = dt['musicname']
     id_list = crawler.get_ID(name)
@@ -26,11 +29,15 @@ def getMusic(request):
                     'url':crawler.get_Music_url(id),
                     'pic_url':crawler.get_pic_url(id),
                     } for id in id_list]
+    print(res)
+    mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
 
 @require_http_methods(["GET","POST"])
 def getHotlist(request):
     print(request.body)
+    if request.body in mp:
+        return mp[request.body]
     id_list = crawler.get_Hotlist()
     res = {}
     res['music'] = [{
@@ -41,12 +48,14 @@ def getHotlist(request):
                     'pic_url':crawler.get_pic_url(id),
                     } for id in id_list]
     print(res['music'])
+    mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
 #print(get_Music_url('the show'))
 
 @require_http_methods(["GET","POST"])
 def mySignIn(request):
     print(request.body)
+    
     dt = json.loads(request.body)
     user_name = dt['username']
     pass_word = dt['password']

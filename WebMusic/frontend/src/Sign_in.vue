@@ -45,7 +45,7 @@ export default{
           if(res.data.auth == true){
             this.$parent.userName = res.data.userName;
           }else{
-            this.$parent.userName = '未登录';
+            this.$parent.userName = '登录';
           }
           alert(this.msg)
           this.close();
