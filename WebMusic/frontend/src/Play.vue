@@ -1,24 +1,36 @@
 <script>
 import Animation from './components/Animation.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 export default{
     components:{
       Animation,
+      FontAwesomeIcon,
     },
     data(){
         return{
             musicId: '',
             cover: '',
             playUrl: '',
+            likeshow:true,
+            starshow:true,
         }
-    },
-    methods:{
         
     },
+    methods:{
+        changelike(){
+            this.likeshow = !this.likeshow;
+        },
+        changestar(){
+            this.starshow = !this.starshow;
+        }
+    },
     mounted:function(){
-        console.log(this.$route.query.id);
+       
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
+        console.log(this.playUrl);
+        console.log(this.$route.query.id);
     }
 }
 </script>
@@ -26,11 +38,8 @@ export default{
 <template>
   <div>
     <div>
-        <img class="background" src="./assets/HomePage/页面上方底色.png" />
+        
         <!--TODO:change the background to an opaque picture><!-->
-        <img class="shade" src="./assets/HomePage/阴影.png"/>
-        <img class="logo" src="./assets/HomePage/logo.png" />
-        <img class="title" src="./assets/HomePage/WebMusic.png" />
     </div>
     <div class="leftWave">
         <Animation />
@@ -41,17 +50,22 @@ export default{
     <img class="cover" :src="cover" />
     <div class="lyric">
     </div>
-    <div class="circleButtonLike">
-        <img class="LikeIcon" src="./assets/播放/喜欢button.png" />
+    <div class="circleButtonLike" @click="changelike">
+        <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
+        <font-awesome-icon icon = "fas fa-heart" v-if="!likeshow"/>
     </div>
-    <div class="circleButtonStar">
-        <img class="StarIcon" src="./assets/播放/收藏button.png" />
+    <div class="circleButtonStar" @click="changestar">
+        <font-awesome-icon icon = "far fa-star" v-if="starshow"/>
+        <font-awesome-icon icon = "fas fa-star" v-if="!starshow"/>
     </div>
     <div class="circleButtonDownload">
-        <img class="DownloadIcon" src="./assets/播放/下载button.png" />
+        <font-awesome-icon icon="fa-solid fa-cloud-arrow-down" />
     </div>
     <div class="circleButtonShare">
-        <img class="ShareIcon" src="./assets/播放/分享button.png" />
+        <font-awesome-icon icon="fa-solid fa-share" />
+    </div>
+    <div class="player">
+        <audio :src="playUrl" controls="controls"></audio>
     </div>
   </div>
 </template>
@@ -107,6 +121,7 @@ export default{
     right: 0;
 }
 .cover{
+    z-index: 101;
     left: 326px;
     top: 226px;
     width: 330px;
@@ -114,6 +129,7 @@ export default{
     position: absolute;
 }
 .lyric{
+    z-index: 101;
     left: 763px;
     top: 226px;
     width: 408px;
@@ -124,6 +140,7 @@ export default{
     position: absolute;
 }
 .LikeIcon{
+    z-index: 101;
     top: 13px;
     left: -1px;
     width: 36px;
@@ -131,18 +148,21 @@ export default{
     position: relative;
 }
 .StarIcon{
+    z-index: 101;
     top: 12px;  
     width: 36px;
     height: 36px;
     position: relative;
 }
 .DownloadIcon{
+    z-index: 101;
     top: 12px;  
     width: 36px;
     height: 36px;
     position: relative;
 }
 .ShareIcon{
+    z-index: 101;
     top: 13px;  
     left: -1px;
     width: 36px;
@@ -150,6 +170,7 @@ export default{
     position: relative;
 }
 .circleButtonLike{
+    z-index: 101;
     left: 345px;
     top: 612px;
     width: 60px;
@@ -158,8 +179,10 @@ export default{
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     border-radius: 50%;
+    font-size: 45px;
 }
 .circleButtonStar{
+    z-index: 101;
     left: 418px;
     top: 612px;
     width: 60px;
@@ -168,8 +191,10 @@ export default{
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     border-radius: 50%;
+    font-size: 43px;
 }
 .circleButtonDownload{
+    z-index: 101;
     left: 491px;
     top: 612px;
     width: 60px;
@@ -178,8 +203,10 @@ export default{
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     border-radius: 50%;
+    font-size: 40px;
 }
 .circleButtonShare{
+    z-index: 101;
     left: 564px;
     top: 612px;
     width: 60px;
@@ -188,6 +215,17 @@ export default{
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     border-radius: 50%;
+    font-size: 40px;
+}
+.player{
+    z-index:101;
+    left: 564px;
+    top: 762px;
+    width: 300px;
+    height: 60px;
+    text-align: center;
+    position: absolute;
+   
 }
 </style>
   

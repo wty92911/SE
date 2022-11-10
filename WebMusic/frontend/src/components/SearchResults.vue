@@ -25,8 +25,9 @@
 </template>
 <style scoped>
 .song1{
-    padding-left: 300px;
-    padding-top: 300px;
+    z-index: 101;
+    left: 300px;
+    top: 300px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -34,8 +35,9 @@
     position: absolute;
 }
 .song2{
-    padding-left: 700px;
-    padding-top: 300px;
+    z-index: 101;
+    left: 700px;
+    top: 300px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -43,8 +45,9 @@
     position: absolute;
 }
 .song3{
-    padding-left: 1100px;
-    padding-top: 300px;
+    z-index: 101;
+    left: 1100px;
+    top: 300px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -52,8 +55,9 @@
     position: absolute;
 }
 .song4{
-    padding-left: 300px;
-    padding-top: 600px;
+    z-index: 101;
+    left: 300px;
+    top: 600px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -61,8 +65,9 @@
     position: absolute;
 }
 .song5{
-    padding-left: 700px;
-    padding-top: 600px;
+    z-index: 101;
+    left: 700px;
+    top: 600px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -70,8 +75,9 @@
     position: absolute;
 }
 .song6{
-    padding-left: 1100px;
-    padding-top: 600px;
+    z-index: 101;
+    left: 1100px;
+    top: 600px;
     width: 160px;
     height: 160px;
     line-height: 20px;
@@ -79,8 +85,8 @@
     position: absolute;
 }
 .pg_cover1{
-    padding-left: 600px;
-    padding-top: 800px;
+    left: 600px;
+    top: 800px;
     width: 350px;
     height: 45px;
     line-height: 20px;

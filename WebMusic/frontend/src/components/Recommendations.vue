@@ -35,12 +35,12 @@
     height: 55px;
     line-height: 28px;
     border-radius: 30px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0);
     color: rgba(16, 16, 16, 1);
     font-size: 28px;
     text-align: center;
     font-family: Roboto;
-    border: 1px solid rgba(240, 240, 240, 1);
+    border: 1px solid rgba(240, 240, 240, 0.617);
     position: absolute;
 }
 .song1{
@@ -51,6 +51,7 @@
     line-height: 20px;
     text-align: center;
     position: absolute;
+    border: 1px solid rgba(240, 240, 240, 0.617);
 }
 .song2{
     left: 398px;
@@ -60,6 +61,7 @@
     line-height: 20px;
     text-align: center;
     position: absolute;
+    border: 1px solid rgba(240, 240, 240, 0.617);
 }
 .song3{
     left: 138px;
@@ -69,6 +71,7 @@
     line-height: 20px;
     text-align: center;
     position: absolute;
+    border: 1px solid rgba(240, 240, 240, 0.617);
 }
 .song4{
     left: 398px;
@@ -78,6 +81,7 @@
     line-height: 20px;
     text-align: center;
     position: absolute;
+    border: 1px solid rgba(240, 240, 240, 0.617);
 }
 
 </style>

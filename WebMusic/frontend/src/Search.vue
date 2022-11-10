@@ -13,6 +13,7 @@
     data(){
 
       return {
+        music :[],
         img1 : "./assets/Search/歌曲封面.png",
         img2 : "./assets/Search/歌曲封面.png",
         img3 : "./assets/Search/歌曲封面.png",
@@ -38,6 +39,9 @@
         searchMusic(this.$route.query.musicName).then(
           (res)=>{
             console.log(res)
+            for(let i = 0; i < 6; i = i + 1){
+              this.music.push(res.data.music[i]);
+            }
             this.img1 = res.data.music[0].pic_url;
             this.img2 = res.data.music[1].pic_url;
             this.img3 = res.data.music[2].pic_url;
@@ -58,7 +62,11 @@
             this.artist6 = res.data.music[5].artists[0];
           }
         )
-      }
+      },
+      playMusic(index){
+         
+         this.$router.push({name:'Play',query:{id: this.music[index].id, cover: this.music[index].pic_url, playUrl: this.music[index].url}});
+       },
     },
     mounted:function(){
       this.getsearch();
@@ -74,78 +82,95 @@
   
 <template>
   <div>
-    <PageHeader />
+    <div v-for="(song,index) in music" :key="index">
       <SearchResults>
-        <template #song1>
-          <Song>
-            <template #cover>
-              <img :src="img1" class ="cover"/>
-            </template>
-            <template #title>
-              {{name1}}
-              <p>{{artist1}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #song2>
-          <Song>
-            <template #cover>
-              <img :src="img2" class ="cover"/>
-            </template>
-            <template #title>
-              {{name2}} 
-             <p> {{artist2}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #song3>
-          <Song>
-            <template #cover>
-              <img :src="img3" class ="cover"/>
-            </template>
-            <template #title>
-              {{name3}} 
-             <p> {{artist3}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #song4>
-          <Song>
-            <template #cover>
-              <img :src="img4" class ="cover"/>
-            </template>
-            <template #title>
-              {{name4}} 
-             <p> {{artist4}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #song5>
-          <Song>
-            <template #cover>
-              <img :src="img5" class ="cover"/>
-            </template>
-            <template #title>
-              {{name5}} 
-             <p> {{artist5}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #song6>
-          <Song>
-            <template #cover>
-              <img :src="img6" class ="cover"/>
-            </template>
-            <template #title>
-              {{name6}} 
-              <p>{{artist6}}</p>
-            </template>
-          </Song>
-        </template>
-        <template #pg_cover1>
-        </template>
+        
+          <template #song1>
+            <div v-if="index==0"  @click="playMusic(0)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
+
+          <template #song2>
+            <div v-if="index==1 "  @click="playMusic(1)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
+
+          <template #song3>
+            <div v-if="index==2"  @click="playMusic(2)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
+
+          <template #song4>
+            <div v-if="index==3"  @click="playMusic(3)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
+
+          <template #song5>
+            <div v-if="index==4"  @click="playMusic(4)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
+
+          <template #song6>
+            <div v-if="index==5"  @click="playMusic(5)">
+              <Song>
+                <template #cover>
+                  <img :src="song.pic_url" class ="cover"/>
+                </template>
+                <template #title>
+                  {{song.name}}
+                  <p>{{song.artists[0]}}</p>
+                </template>
+              </Song>
+          </div>
+          </template>
       </SearchResults>
-    </div>
+      </div>
+  </div>
 </template>
   
 
