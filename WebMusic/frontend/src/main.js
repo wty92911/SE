@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-plus'
 import Axios from 'axios'
@@ -7,7 +8,7 @@ import {createRouter,createWebHashHistory} from 'vue-router'
 import Play from './Play.vue'
 import Like from './components/LikesHots.vue'
 import Search from './Search.vue'
-import Signin from './Sign_in.vue'
+import Signin from './Signin.vue'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -36,4 +37,5 @@ const router = createRouter({
 })
 app.use(router)
 app.use(ElementUI)
+app.use(AVPlugin)
 app.mount('#app')

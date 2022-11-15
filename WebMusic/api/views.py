@@ -110,3 +110,29 @@ def mySignUp(request):
     res['auth'] = False
     res['message'] = 'error username or password'
     return JsonResponse(res)
+@require_http_methods(["GET","POST"])
+def myLikes(request):
+    print(request.body)
+    dt = json.loads(request.body)
+    res = {}
+    user_name = dt['username']
+    res['exist'] = False
+    try:
+        user = models.User.objects.get(name = user_name)
+    except:
+        res['message'] = 'wrong user name'
+        return JsonResponse(res)
+    if dt['opt'] == 'add':
+        user.add_likes(dt['id'])
+        res['exist'] = True
+    elif dt['opt'] == 'del':
+        user.del_likes(dt['id'])
+        res['exist'] = False
+    elif dt['opt'] == 'queryid':
+        res['exist'] = (dt['id'] in user.get_likes())
+    elif dt['opt'] == 'queryall':
+        res['likes'] = user.get_likes()
+    user.save()
+    res['message'] = 'done'
+    print(user.get_likes())
+    return JsonResponse(res)

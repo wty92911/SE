@@ -1,8 +1,7 @@
 <script>
-import Sign_in from '../Sign_in.vue';
+import Sign_in from '../Signin.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { treeEmits } from 'element-plus/es/components/tree-v2/src/virtual-tree';
-
+import { watch } from 'vue';
 export default{
     data() {
         return {
@@ -13,7 +12,7 @@ export default{
     },
     methods: {
         searchMusic() {
-            this.$router.push({ name: "Search", query: { musicName: this.musicName } });
+            this.$router.push({ name: "Search", query: { musicName: this.musicName ,userName : this.userName} });
         },
         showsign(){
             this.showSignIn = true;
@@ -22,6 +21,14 @@ export default{
     components: { 
         Sign_in,
         FontAwesomeIcon,
+    },
+    mounted:function(){
+        this.$router.push( {name : 'LikesHots',query:{userName:this.userName}});
+    },
+    watch:{
+        userName:function(){
+            this.$router.push({name : 'LikesHots',query:{userName:this.userName}});
+        }
     }
 }
 </script>

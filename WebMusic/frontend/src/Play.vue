@@ -1,16 +1,19 @@
 <script>
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { myLikes } from './api/api';
 export default{
     components:{
       Animation,
       FontAwesomeIcon,
+      myLikes,
     },
     data(){
         return{
             musicId: '',
             cover: '',
             playUrl: '',
+            userName:'',
             likeshow:true,
             starshow:true,
         }
@@ -18,17 +21,38 @@ export default{
     },
     methods:{
         changelike(){
+            if(this.likeshow){
+                myLikes(this.userName,'del',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }else{
+                myLikes(this.userName,'add',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }
             this.likeshow = !this.likeshow;
         },
         changestar(){
             this.starshow = !this.starshow;
         }
+        
     },
     mounted:function(){
        
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
+        this.userName = this.$route.query.userName;
+        myLikes(this.userName,'queryid',this.musicId).then(
+            (res) => {
+                console.log(res.data);
+                this.likeshow = res.data.exist;
+            }
+        )
         console.log(this.playUrl);
         console.log(this.$route.query.id);
     }
@@ -51,8 +75,8 @@ export default{
     <div class="lyric">
     </div>
     <div class="circleButtonLike" @click="changelike">
-        <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
-        <font-awesome-icon icon = "fas fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "far fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "fas fa-heart" v-if="likeshow"/>
     </div>
     <div class="circleButtonStar" @click="changestar">
         <font-awesome-icon icon = "far fa-star" v-if="starshow"/>
@@ -67,6 +91,7 @@ export default{
     <div class="player">
         <audio :src="playUrl" controls="controls"></audio>
     </div>
+
   </div>
 </template>
   
