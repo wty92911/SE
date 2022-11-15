@@ -9,14 +9,12 @@ export default{
   },
   data(){
     return{
+      userName:'123',
     }
   },
   methods:{
 
   },
-  mounted:function(){
-    this.$router.push('/LikesHots')
-  }
 }
 </script>
   
