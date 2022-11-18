@@ -2,11 +2,19 @@
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { myLikes } from './api/api';
+import { AVWaveform } from 'vue-audio-visual/dist/vue-audio-visual'
+import {AVLine} from 'vue-audio-visual/dist/vue-audio-visual'
+import {useAVBars} from 'vue-audio-visual/dist/vue-audio-visual'
+import Player from '../src/Player.vue'
 export default{
     components:{
       Animation,
       FontAwesomeIcon,
       myLikes,
+      AVWaveform,
+      AVLine,
+      useAVBars,
+      Player,
     },
     data(){
         return{
@@ -38,8 +46,10 @@ export default{
         },
         changestar(){
             this.starshow = !this.starshow;
+        },
+        show(){
+            console.log(this.$refs.foo);
         }
-        
     },
     mounted:function(){
        
@@ -55,7 +65,7 @@ export default{
         )
         console.log(this.playUrl);
         console.log(this.$route.query.id);
-    }
+        }
 }
 </script>
   
@@ -89,7 +99,7 @@ export default{
         <font-awesome-icon icon="fa-solid fa-share" />
     </div>
     <div class="player">
-        <audio :src="playUrl" controls="controls"></audio>
+        <Player :my-source="playUrl"></Player>
     </div>
 
   </div>
