@@ -12,6 +12,15 @@ from django.contrib.auth import authenticate,login
 import json
 # Create your views here.
 ##
+def getMusicbyId(id):
+    namels = crawler.get_Music_name(id)
+    return {
+        'id':id,
+        'name':namels[0],
+        'artists':namels[1],
+        'url':crawler.get_Music_url(id),
+        'pic_url':crawler.get_pic_url(id),
+    }
 mp = {}
 @require_http_methods(["GET","POST"])
 def getMusic(request):
@@ -22,13 +31,7 @@ def getMusic(request):
     name = dt['musicname']
     id_list = crawler.get_ID(name)
     res = {}
-    res['music'] = [{
-                    'id':id,
-                    'name':crawler.get_Music_name(id),
-                    'artists':crawler.get_artists_name(id),
-                    'url':crawler.get_Music_url(id),
-                    'pic_url':crawler.get_pic_url(id),
-                    } for id in id_list]
+    res['music'] = [ getMusicbyId(id) for id in id_list]
     print(res)
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
@@ -40,13 +43,7 @@ def getHotlist(request):
         return mp[request.body]
     id_list = crawler.get_Hotlist()
     res = {}
-    res['music'] = [{
-                    'id':id,
-                    'name':crawler.get_Music_name(id),
-                    'artists':crawler.get_artists_name(id),
-                    'url':crawler.get_Music_url(id),
-                    'pic_url':crawler.get_pic_url(id),
-                    } for id in id_list]
+    res['music'] = [ getMusicbyId(id) for id in id_list]
     print(res['music'])
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
@@ -131,8 +128,12 @@ def myLikes(request):
     elif dt['opt'] == 'queryid':
         res['exist'] = (dt['id'] in user.get_likes())
     elif dt['opt'] == 'queryall':
-        res['likes'] = user.get_likes()
+        if(request.body in mp):
+            return mp[request.body]
+        res['music'] = [ getMusicbyId(id) for id in id_list]
+        
     user.save()
     res['message'] = 'done'
     print(user.get_likes())
+    mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
