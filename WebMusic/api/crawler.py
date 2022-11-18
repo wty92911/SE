@@ -75,15 +75,15 @@ def get_hotcomments(id):
         comments.append((comment,username))
     return comments
 
-def get_ID(name):#返回五个搜索条目
-    url = 'https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s={'+str(name)+'}&type=1&offset=0&total=true&limit=6'
+def get_ID(name):#返回至多18个搜索条目
+    url = 'https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s={'+str(name)+'}&type=1&offset=0&total=true&limit=18'
     r = rs.get(url, headers=get_headers())
     r.encoding = 'utf-8'
     str_r=r.text
     dict_r = json.loads(str_r)
     #print(dict_r)
     #print(dict_r["result"]['songs'][0]['id'])
-    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,6)]
+    ID=[dict_r["result"]['songs'][i]['id'] for i in range(0,len(dict_r["result"]['songs']))]
     #print(dict_r["result"]['songs'][0]['artists'][0]['name'])
     return ID
 
@@ -130,19 +130,12 @@ def get_Music_name(id):
     r.encoding = 'utf-8'
     str_r = r.text
     dict_r = json.loads(str_r)
-    #print(dict_r)
+    artists_name =  [x['name'] for x in dict_r['songs'][0]['artists']]
+    print(dict_r)
     #print(dict_r['songs'][0])
     #artists_name =  dict_r['songs'][0]['album']['name']
-    return dict_r['songs'][0]['name']
-def get_artists_name(id):
-    url = "http://music.163.com/api/song/detail/?id={}&ids=%5B{}%5D".format(id,id)
-    r = rs.get(url, headers=get_headers())
-    r.encoding = 'utf-8'
-    str_r = r.text
-    dict_r = json.loads(str_r)
-    ##print(dict_r['songs'])
-    artists_name =  [x['name'] for x in dict_r['songs'][0]['artists']]
-    return artists_name
+    return (dict_r['songs'][0]['name'],artists_name)
+
 def get_Music_url(id):
     url = "http://music.163.com/api/song/enhance/player/url?id={}&ids=%5B{}%5D&br={}".format(id,id,999000)
     r = rs.get(url, headers=get_headers())
