@@ -1,14 +1,15 @@
 import { createApp } from 'vue'
-import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-plus'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import {createRouter,createWebHashHistory} from 'vue-router'
+import {AVPlugin} from 'vue-audio-visual'
 import Play from './Play.vue'
 import Like from './components/LikesHots.vue'
 import Search from './Search.vue'
 import Signin from './Signin.vue'
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
