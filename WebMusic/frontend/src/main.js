@@ -9,7 +9,7 @@ import Play from './Play.vue'
 import Like from './components/LikesHots.vue'
 import Search from './Search.vue'
 import Signin from './Signin.vue'
-
+import ShowStars from './ShowStars.vue'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -30,6 +30,7 @@ const routes = [
     {path :"/LikesHots",name:"LikesHots",component: Like}, 
     {path :"/Search",name:"Search",component: Search},
     {path :"/Play",name:"Play",component: Play},
+    {path :"/ShowStars",name:"ShowStars",component:ShowStars}
 ]
 const router = createRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
