@@ -128,10 +128,7 @@ def myLikes(request):
     elif dt['opt'] == 'queryid':
         res['exist'] = (dt['id'] in user.get_likes())
     elif dt['opt'] == 'queryall':
-        if(request.body in mp):
-            return mp[request.body]
-        res['music'] = [ getMusicbyId(id) for id in id_list]
-        
+        res['music'] = [ getMusicbyId(int(id)) for id in user.get_likes()]
     user.save()
     res['message'] = 'done'
     print(user.get_likes())

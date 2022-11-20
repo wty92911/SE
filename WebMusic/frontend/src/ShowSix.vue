@@ -1,18 +1,16 @@
 <script >
-  import HelloWorld from './components/HelloWorld.vue'
-  import PageHeader from './components/PageHeader.vue'
   import SearchResults from './components/SearchResults.vue'
   import Song from './components/Song.vue'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
   export default{
     components:{
-      PageHeader,
       SearchResults,
       Song,
       FontAwesomeIcon,
     },
     props:{
         music:Object,
+        userName:'',
     },
     data(){
 
@@ -23,7 +21,7 @@
     methods:{
     
         playMusic(index){
-            this.$router.push({name:'Play',query:{userName:this.$route.userName,id: this.music[index].id, cover: this.music[index].pic_url, playUrl: this.music[index].url}});
+            this.$router.push({name:'Play',query:{userName:this.userName,id: this.music[index].id, cover: this.music[index].pic_url, playUrl: this.music[index].url}});
         },
         nextPage(){
             console.log(this.music.length);
@@ -42,7 +40,9 @@
         },
     },
     mounted:function(){
-       
+        
+        console.log(this.userName);
+        console.log(this.music);
     },
   }
 

@@ -1,13 +1,16 @@
 <script>
 import Sign_in from '../Signin.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { watch } from 'vue';
+import ShowSix from '../ShowSix.vue';
+import { myLikes } from '../api/api';
+
 export default{
     data() {
         return {
             musicName: "",
             showSignIn : false,
             userName : '登录',
+            music:[],
         };
     },
     methods: {
@@ -16,11 +19,24 @@ export default{
         },
         showsign(){
             this.showSignIn = true;
+        },
+        showstars(){
+            myLikes(this.userName,"queryall",'').then(
+                (res)=>{
+                    this.music = [];
+                    console.log(res.data);
+                    for(let i = 0; i < res.data.music.length; i = i + 1){
+                        this.music.push(res.data.music[i]);
+                    }
+                    this.$router.push({ name: "ShowStars", query: { music: JSON.stringify(this.music) ,userName : this.userName} });
+                }
+            )
         }
     },
     components: { 
         Sign_in,
         FontAwesomeIcon,
+        ShowSix,
     },
     mounted:function(){
         this.$router.push( {name : 'LikesHots',query:{userName:this.userName}});
@@ -28,6 +44,7 @@ export default{
     watch:{
         userName:function(){
             this.$router.push({name : 'LikesHots',query:{userName:this.userName}});
+            
         }
     }
 }
@@ -45,10 +62,12 @@ export default{
         <img class="title" src="../assets/HomePage/WebMusic.png" />
         <font-awesome-icon icon="fa-solid fa-magnifying-glass" class="searchIcon" @click="searchMusic"/>
         <input class="searchInput" type = "text" v-model="musicName" placeholder="请输入歌曲名">
-        <div class ="signin" @click="showsign">
+        <div class="signin" @click="showsign()">
             {{userName}}
         </div>
+        <font-awesome-icon @click="showstars()" v-if="!showSignIn" class="stars" icon="fa-solid fa-star-half-stroke" />
         <!--修改登录注册 美观点-->
+        
     </div> 
 
 </template>
@@ -133,7 +152,7 @@ export default{
 }
 .signin{
     z-index: 100;
-    left: 1160px;
+    left: 1060px;
     top: 82px;
     width: 100px;
     height: 50px;
@@ -146,5 +165,15 @@ export default{
     font-family: Microsoft Yahei;
     color: rgb(44, 40, 40);
     
+}
+.stars{
+    z-index: 100;
+    left: 1260px;
+    top: 82px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    position: fixed;
+    font-size: 5px;
 }
 </style>
