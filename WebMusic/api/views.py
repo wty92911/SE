@@ -3,7 +3,7 @@ from ast import match_case
 from http.client import HTTPResponse
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from .import crawler
+from . import crawler
 from django.views.decorators.http import require_http_methods
 from django.core import serializers
 from . import models
@@ -32,6 +32,39 @@ def getMusic(request):
     print(res)
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
+
+@require_http_methods(["GET","POST"])
+def getLyric(request):
+    print(request.body)
+    if request.body in mp:
+        return mp[request.body]
+    dt = json.loads(request.body)
+    id = dt['id']
+    # id=16607964
+    musicName=crawler.get_Music_name(id)
+    musicLyric=crawler.get_lyric(id).splitlines()
+    # print(type(musicLyric))
+    lyricLines=[]
+    for line in musicLyric:
+        splitLine=line.split(']')
+        tempLine=[]
+        tempLine.append(splitLine[0][1:])
+        tempLine.append(splitLine[1])
+        # print(tempLine)
+        lyricLines.append(tempLine)
+    res = {}
+    res['lyric'] = {
+                    'id':id,
+                    'name':musicName,
+                    'lyric':[{
+                        'timeStamp':line[0],
+                        'content':line[1]
+                    }for line in lyricLines]
+                    }
+    # print(res)
+    mp[request.body] = JsonResponse(res)
+    return JsonResponse(res)
+
 
 @require_http_methods(["GET","POST"])
 def getHotlist(request):
