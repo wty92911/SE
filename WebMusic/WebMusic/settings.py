@@ -112,6 +112,7 @@ DATABASES = {
         'PORT' : 3306,
         'USER':'remote',
         'PASSWORD':'remote'  #密码
+        
     }
 }
 
