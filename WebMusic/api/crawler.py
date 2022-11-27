@@ -6,7 +6,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
-
+import time
 
 
 
@@ -125,13 +125,15 @@ def get_pic_url(id):
     pic_url = dict_r['songs'][0]['album']['picUrl']
     return pic_url
 def get_Music_name(id):
+    time.sleep(0.2)
     url = "http://music.163.com/api/song/detail/?id={}&ids=%5B{}%5D".format(id,id)
     r = rs.get(url, headers=get_headers())
     r.encoding = 'utf-8'
     str_r = r.text
     dict_r = json.loads(str_r)
-    artists_name =  [x['name'] for x in dict_r['songs'][0]['artists']]
     print(dict_r)
+    artists_name =  [x['name'] for x in dict_r['songs'][0]['artists']]
+    
     #print(dict_r['songs'][0])
     #artists_name =  dict_r['songs'][0]['album']['name']
     return (dict_r['songs'][0]['name'],artists_name)
