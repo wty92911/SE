@@ -7,12 +7,20 @@ class test_simple(TestCase):
         self.client = Client()
 
     def test_getHotlist(self):
+        return
         response = self.client.get(r'/api/getHotlist')
         self.assertEqual(response.status_code,200)
         
     def test_getMusic(self):
+        return 
         data = {
             'musicname':'love',
         }
         response = self.client.post(r'/api/getMusic',data)
         self.assertEqual(response.status_code,200)
+    def test_getComment(self):
+        data = {
+            'id' :1444211787,
+        }
+        response = self.client.post(r'/api/getComment',data)
+        
