@@ -4,10 +4,12 @@ import ElementUI from 'element-plus'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 import {createRouter,createWebHashHistory} from 'vue-router'
+import {AVPlugin} from 'vue-audio-visual'
 import Play from './Play.vue'
 import Like from './components/LikesHots.vue'
 import Search from './Search.vue'
-import Signin from './Sign_in.vue'
+import Signin from './Signin.vue'
+import ShowStars from './ShowStars.vue'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -17,17 +19,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { fas,faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import {far, faHeart,faStar} from '@fortawesome/free-regular-svg-icons'
-import { faVolumeLow,faRightToBracket,faShare,faCloudArrowDown,faMagnifyingGlass}   from '@fortawesome/free-solid-svg-icons'
+import { faVolumeLow,faRightToBracket,faShare,faCloudArrowDown,faMagnifyingGlass,faCircleChevronRight}   from '@fortawesome/free-solid-svg-icons'
 
 
 /* add icons to the library */
-library.add(fas,far,faUserSecret,faVolumeLow,faRightToBracket,faHeart,faShare,faStar,faCloudArrowDown,faMagnifyingGlass)
+library.add(fas,far,faUserSecret,faVolumeLow,faRightToBracket,faHeart,faShare,faStar,faCloudArrowDown,faMagnifyingGlass,faCircleChevronRight)
 const app = createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(VueAxios,Axios)
 app.component('Signin',Signin)
 const routes = [
     {path :"/LikesHots",name:"LikesHots",component: Like}, 
     {path :"/Search",name:"Search",component: Search},
     {path :"/Play",name:"Play",component: Play},
+    {path :"/ShowStars",name:"ShowStars",component:ShowStars}
 ]
 const router = createRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
@@ -36,4 +39,5 @@ const router = createRouter({
 })
 app.use(router)
 app.use(ElementUI)
+app.use(AVPlugin)
 app.mount('#app')

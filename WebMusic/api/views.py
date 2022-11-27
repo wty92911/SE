@@ -12,23 +12,30 @@ from django.contrib.auth import authenticate,login
 import json
 # Create your views here.
 ##
+def getMusicbyId(id):
+    namels = crawler.get_Music_name(id)
+    return {
+        'id':id,
+        'name':namels[0],
+        'artists':namels[1],
+        'url':crawler.get_Music_url(id),
+        'pic_url':crawler.get_pic_url(id),
+    }
 mp = {}
 @require_http_methods(["GET","POST"])
 def getMusic(request):
     print(request.body)
+    print(request.POST)
     if request.body in mp:
         return mp[request.body]
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     name = dt['musicname']
     id_list = crawler.get_ID(name)
     res = {}
-    res['music'] = [{
-                    'id':id,
-                    'name':crawler.get_Music_name(id),
-                    'artists':crawler.get_artists_name(id),
-                    'url':crawler.get_Music_url(id),
-                    'pic_url':crawler.get_pic_url(id),
-                    } for id in id_list]
+    res['music'] = [ getMusicbyId(id) for id in id_list]
     print(res)
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
@@ -40,13 +47,7 @@ def getHotlist(request):
         return mp[request.body]
     id_list = crawler.get_Hotlist()
     res = {}
-    res['music'] = [{
-                    'id':id,
-                    'name':crawler.get_Music_name(id),
-                    'artists':crawler.get_artists_name(id),
-                    'url':crawler.get_Music_url(id),
-                    'pic_url':crawler.get_pic_url(id),
-                    } for id in id_list]
+    res['music'] = [ getMusicbyId(id) for id in id_list]
     print(res['music'])
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
@@ -56,7 +57,10 @@ def getHotlist(request):
 def mySignIn(request):
     print(request.body)
     
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     user_name = dt['username']
     pass_word = dt['password']
     res = {}    
@@ -87,7 +91,10 @@ def mySignIn(request):
 @require_http_methods(["GET","POST"])
 def mySignUp(request):
     print(request.body)
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     user_name = dt['username']
     pass_word = dt['password']
     res = {}    
@@ -109,4 +116,34 @@ def mySignUp(request):
             return JsonResponse(res)
     res['auth'] = False
     res['message'] = 'error username or password'
+    return JsonResponse(res)
+@require_http_methods(["GET","POST"])
+def myLikes(request):
+    print(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
+    res = {}
+    user_name = dt['username']
+    res['exist'] = False
+    try:
+        user = models.User.objects.get(name = user_name)
+    except:
+        res['message'] = 'wrong user name'
+        return JsonResponse(res)
+    if dt['opt'] == 'add':
+        user.add_likes(dt['id'])
+        res['exist'] = True
+    elif dt['opt'] == 'del':
+        user.del_likes(dt['id'])
+        res['exist'] = False
+    elif dt['opt'] == 'queryid':
+        res['exist'] = (dt['id'] in user.get_likes())
+    elif dt['opt'] == 'queryall':
+        res['music'] = [ getMusicbyId(int(id)) for id in user.get_likes()]
+    user.save()
+    res['message'] = 'done'
+    print(user.get_likes())
+    mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
