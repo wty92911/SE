@@ -25,9 +25,13 @@ mp = {}
 @require_http_methods(["GET","POST"])
 def getMusic(request):
     print(request.body)
+    print(request.POST)
     if request.body in mp:
         return mp[request.body]
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     name = dt['musicname']
     id_list = crawler.get_ID(name)
     res = {}
@@ -53,7 +57,10 @@ def getHotlist(request):
 def mySignIn(request):
     print(request.body)
     
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     user_name = dt['username']
     pass_word = dt['password']
     res = {}    
@@ -84,7 +91,10 @@ def mySignIn(request):
 @require_http_methods(["GET","POST"])
 def mySignUp(request):
     print(request.body)
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     user_name = dt['username']
     pass_word = dt['password']
     res = {}    
@@ -110,7 +120,10 @@ def mySignUp(request):
 @require_http_methods(["GET","POST"])
 def myLikes(request):
     print(request.body)
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     res = {}
     user_name = dt['username']
     res['exist'] = False
