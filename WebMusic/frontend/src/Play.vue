@@ -1,16 +1,27 @@
 <script>
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { myLikes } from './api/api';
+import { AVWaveform } from 'vue-audio-visual/dist/vue-audio-visual'
+import {AVLine} from 'vue-audio-visual/dist/vue-audio-visual'
+import {useAVBars} from 'vue-audio-visual/dist/vue-audio-visual'
+import Player from '../src/Player.vue'
 export default{
     components:{
       Animation,
       FontAwesomeIcon,
+      myLikes,
+      AVWaveform,
+      AVLine,
+      useAVBars,
+      Player,
     },
     data(){
         return{
             musicId: '',
             cover: '',
             playUrl: '',
+            userName:'',
             likeshow:true,
             starshow:true,
         }
@@ -18,10 +29,26 @@ export default{
     },
     methods:{
         changelike(){
+            if(this.likeshow){
+                myLikes(this.userName,'del',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }else{
+                myLikes(this.userName,'add',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }
             this.likeshow = !this.likeshow;
         },
         changestar(){
             this.starshow = !this.starshow;
+        },
+        show(){
+            console.log(this.$refs.foo);
         }
     },
     mounted:function(){
@@ -29,9 +56,16 @@ export default{
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
+        this.userName = this.$route.query.userName;
+        myLikes(this.userName,'queryid',this.musicId).then(
+            (res) => {
+                console.log(res.data);
+                this.likeshow = res.data.exist;
+            }
+        )
         console.log(this.playUrl);
         console.log(this.$route.query.id);
-    }
+        }
 }
 </script>
   
@@ -51,8 +85,8 @@ export default{
     <div class="lyric">
     </div>
     <div class="circleButtonLike" @click="changelike">
-        <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
-        <font-awesome-icon icon = "fas fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "far fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "fas fa-heart" v-if="likeshow"/>
     </div>
     <div class="circleButtonStar" @click="changestar">
         <font-awesome-icon icon = "far fa-star" v-if="starshow"/>
@@ -65,8 +99,9 @@ export default{
         <font-awesome-icon icon="fa-solid fa-share" />
     </div>
     <div class="player">
-        <audio :src="playUrl" controls="controls"></audio>
+        <Player :my-source="playUrl"></Player>
     </div>
+
   </div>
 </template>
   

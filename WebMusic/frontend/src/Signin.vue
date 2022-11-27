@@ -42,12 +42,15 @@ export default{
       mySignUp(this.usr,this.pwd).then(
         (res)=>{
           this.msg = res.data.message;
+          console.log(res.data);
           if(res.data.auth == true){
-            this.$parent.userName = res.data.userName;
+            this.$parent.userName = res.data.username;
           }else{
             this.$parent.userName = '登录';
           }
           alert(this.msg)
+          this.usr = '';
+          this.pwd = '';
           this.close();
         }
       )
