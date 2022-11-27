@@ -1,11 +1,14 @@
 <script>
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Lyric from './components/Lyric.vue'
+import Lyric from './components/Lyric.vue';
 export default{
     components:{
-      Animation,
-      FontAwesomeIcon,
-    },
+    Animation,
+    FontAwesomeIcon,
+    Lyric
+},
     data(){
         return{
             musicId: '',
@@ -14,7 +17,7 @@ export default{
             likeshow:true,
             starshow:true,
         }
-        
+
     },
     methods:{
         changelike(){
@@ -25,7 +28,7 @@ export default{
         }
     },
     mounted:function(){
-       
+
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
@@ -34,11 +37,11 @@ export default{
     }
 }
 </script>
-  
+
 <template>
   <div>
     <div>
-        
+
         <!--TODO:change the background to an opaque picture><!-->
     </div>
     <div class="leftWave">
@@ -49,6 +52,7 @@ export default{
     </div>
     <img class="cover" :src="cover" />
     <div class="lyric">
+        <Lyric />
     </div>
     <div class="circleButtonLike" @click="changelike">
         <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
@@ -69,8 +73,8 @@ export default{
     </div>
   </div>
 </template>
-  
-<style scoped>  
+
+<style scoped>
 .logo{
     z-index: 100;
     left: 100px;
@@ -149,21 +153,21 @@ export default{
 }
 .StarIcon{
     z-index: 101;
-    top: 12px;  
+    top: 12px;
     width: 36px;
     height: 36px;
     position: relative;
 }
 .DownloadIcon{
     z-index: 101;
-    top: 12px;  
+    top: 12px;
     width: 36px;
     height: 36px;
     position: relative;
 }
 .ShareIcon{
     z-index: 101;
-    top: 13px;  
+    top: 13px;
     left: -1px;
     width: 36px;
     height: 36px;
@@ -225,7 +229,6 @@ export default{
     height: 60px;
     text-align: center;
     position: absolute;
-   
+
 }
 </style>
-  

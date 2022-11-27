@@ -8,3 +8,9 @@ export const searchMusic = (name) => {return axios.post('getMusic',{'musicname':
 export const getHotlist = () => {return axios.post('getHotlist')};
 export const mySignIn = (username,password) =>{return axios.post('mySignIn',{'username':username,'password':password})};
 export const mySignUp = (username,password) =>{return axios.post('mySignUp',{'username':username,'password':password})};
+export const getLyric = () => {return axios.post('getLyric')}
+
+
+
+
+
