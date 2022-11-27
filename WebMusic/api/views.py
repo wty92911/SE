@@ -66,8 +66,8 @@ def getLyric(request):
                     }for line in lyricLines]
                     }
     # print(res)
-    mp[request.body] = JsonResponse(res)
-    return JsonResponse(res)
+    mp[request.body] = JsonResponse(musicLyric)
+    return JsonResponse(musicLyric)
 
 
 @require_http_methods(["GET","POST"])
