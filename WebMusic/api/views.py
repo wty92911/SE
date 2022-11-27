@@ -4,11 +4,13 @@ from http.client import HTTPResponse
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .import crawler
+from .import get_comment
 from django.views.decorators.http import require_http_methods
 from django.core import serializers
 from . import models
 from django.contrib.auth import authenticate,login
-
+from multiprocessing import Pool#多进程池
+from collections import ChainMap
 import json
 # Create your views here.
 ##
@@ -147,3 +149,17 @@ def myLikes(request):
     print(user.get_likes())
     mp[request.body] = JsonResponse(res)
     return JsonResponse(res)
+
+@require_http_methods(["GET","POST"])
+def getComment(request):
+    dt = json.loads(request.body)
+    id = dt['id']
+    musicid = id
+    gethtml = get_comment.get_response(0, 200, str(musicid))
+    data = get_comment.parse_return(gethtml)
+    for x in range(1, 100):
+        gethtml =get_comment.get_response(x, 200, str(musicid))
+        data1 = get_comment.parse_return(gethtml)
+        mindata = ChainMap(data, data1)
+        data = mindata
+    return JsonResponse(data)
