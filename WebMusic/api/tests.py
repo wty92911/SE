@@ -9,10 +9,10 @@ class test_simple(TestCase):
     def test_getHotlist(self):
         response = self.client.get(r'/api/getHotlist')
         self.assertEqual(response.status_code,200)
-        
+
     def test_getMusic(self):
         data = {
-            'musicname':'love',
+            'musicname':'爱如潮水',
         }
         response = self.client.post(r'/api/getMusic',data)
         self.assertEqual(response.status_code,200)
