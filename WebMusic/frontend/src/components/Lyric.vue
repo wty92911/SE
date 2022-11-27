@@ -1,5 +1,5 @@
 <script>
-import { getLyric } from './api/api'
+import { getLyric } from '../api/api'
 
 
 export default{
