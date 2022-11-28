@@ -15,6 +15,7 @@ export default{
             likeshow:true,
             starshow:true,
             lyricshow:false,
+            currentMusicLyric:[],
 
 
             musicLyric: '[00:00.000] 作词 : 张军磊\
@@ -78,6 +79,7 @@ export default{
           let ss = item.split(':')[1].split('.')[0].split('')[0] === '0' ? item.split(':')[1].split('.')[0].split('')[1] : item.split(':')[1].split('.')[0]
           // 秒数作为key, 对应歌词作为value
           lyricObj[ms + Number(ss)] = contentArr[index]
+          this.currentMusicLyric.push(contentArr[index])
         })
         // 返回得到的歌词对象(可以打印看看)
         console.log(lyricObj);
@@ -164,7 +166,13 @@ export default{
     <div class="alllyric" v-if="lyricshow">
       <font-awesome-icon @click="lyricHide()" class="closelyric" icon="fa-solid fa-circle-xmark" />
       <div>
-        {{musicLyric}}
+        <ul>
+            <li v-for="value in currentMusicLyric">
+                {{value}}
+            </li>
+        </ul>
+        <!-- {{currentMusicLyric}} -->
+        <!-- {{musicLyric}} -->
       </div>
     </div>
   </div>
@@ -331,6 +339,7 @@ export default{
   font-size: 20px;
   color: rgb(114, 217, 23);
   text-align: center;
+  font-family: 方正综艺体-标准;
 }
 .alllyric{
     z-index: 101;
@@ -340,9 +349,12 @@ export default{
     height: 460px;
     line-height: 20px;
     text-align: center;
+    text-indent: 0rem;
+    color: rgba(106, 26, 219, 0.992);
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     background-color: rgba(240, 248, 255, 0.507);
+    font-family: 方正综艺体-标准;
 }
 .closelyric{
     z-index: 101;
