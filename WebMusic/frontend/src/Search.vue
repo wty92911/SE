@@ -64,7 +64,7 @@
         )
       },
       playMusic(index){
-         
+
          this.$router.push({name:'Play',query:{id: this.music[index].id, cover: this.music[index].pic_url, playUrl: this.music[index].url}});
        },
     },
@@ -79,12 +79,12 @@
   }
 
 </script>
-  
+
 <template>
   <div>
     <div v-for="(song,index) in music" :key="index">
       <SearchResults>
-        
+
           <template #song1>
             <div v-if="index==0"  @click="playMusic(0)">
               <Song>
@@ -172,7 +172,7 @@
       </div>
   </div>
 </template>
-  
+
 
 <style scoped>
 @media (min-width: 1024px) {
