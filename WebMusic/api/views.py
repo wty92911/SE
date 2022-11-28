@@ -36,35 +36,22 @@ def getMusic(request):
 @require_http_methods(["GET","POST"])
 def getLyric(request):
     # print(request.method)
-    if request.body=="POST":
-        if request.body in mp:
-            return mp[request.body]
+    if(request.body in mp):
+        return mp[request.body]
+    try:
         dt = json.loads(request.body)
         id = dt['id']
-    elif request.method=="GET":
-        id=request.GET.get("id")
+    except:
+        id = request.POST.get("id")
     # id=16607964
     # print(id)
     musicName=crawler.get_Music_name(id)
-    musicLyric=crawler.get_lyric(id).splitlines()
+    musicLyric=crawler.get_lyric(id)
     # print(type(musicLyric))
-    lyricLines=[]
-    for line in musicLyric:
-        splitLine=line.split(']')
-        tempLine=[]
-        tempLine.append(splitLine[0][1:])
-        tempLine.append(splitLine[1])
-        # print(tempLine)
-        lyricLines.append(tempLine)
     res = {}
     res['lyric'] = {
                     'id':id,
                     'musicLyric':musicLyric,
-                    # 'name':musicName,
-                    # 'lyric':[{
-                    #     'timeStamp':line[0],
-                    #     'content':line[1]
-                    # }for line in lyricLines]
                     }
     # print(res)
     mp[request.body] = JsonResponse(res)
