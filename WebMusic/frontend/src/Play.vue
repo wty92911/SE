@@ -14,6 +14,7 @@ export default{
             playUrl: '',
             likeshow:true,
             starshow:true,
+            lyricshow:false,
 
 
             musicLyric: '[00:00.000] 作词 : 张军磊\
@@ -105,6 +106,12 @@ export default{
         }
         this.playState = !this.playState // 点击设置对立状态
       },
+      lyricShow() {
+        this.lyricshow = true;
+      },
+      lyricHide() {
+        this.lyricshow = false;
+      }
     },
     mounted:function(){
 
@@ -149,8 +156,16 @@ export default{
         <font-awesome-icon icon="fa-solid fa-share" />
     </div>
     <div class="player">
-        <p class="lrc">{{ curLyric }}</p>
+        <div @click="lyricShow()">
+          <p class="lrc" >{{ curLyric }}</p>
+        </div>
         <audio ref = "audio" preload = "true" :src="playUrl" @timeupdate = "timeupdate" controls="controls"></audio>
+    </div>
+    <div class="alllyric" v-if="lyricshow">
+      <font-awesome-icon @click="lyricHide()" class="closelyric" icon="fa-solid fa-circle-xmark" />
+      <div>
+        {{musicLyric}}
+      </div>
     </div>
   </div>
 </template>
@@ -316,5 +331,25 @@ export default{
   font-size: 20px;
   color: rgb(114, 217, 23);
   text-align: center;
+}
+.alllyric{
+    z-index: 101;
+    left: 760px;
+    top: 226px;
+    width: 408px;
+    height: 460px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid rgba(187, 187, 187, 1);
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.507);
+}
+.closelyric{
+    z-index: 101;
+    top: 0px;
+    right: 0px;
+    width: 36px;
+    height: 36px;
+    position: absolute;
 }
 </style>
