@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getLyric } from './api/api';
 export default{
     components:{
-      Animation,
-      FontAwesomeIcon,
-    },
+    Animation,
+    FontAwesomeIcon,
+    Lyric
+},
     data(){
         return{
             musicId: '',
@@ -28,6 +29,7 @@ export default{
             lastLy: '' ,// 记录当前播放歌词
             playState: false, // 音乐播放状态(true暂停, false播放)
         }
+
 
     },
     async created(){
@@ -117,6 +119,7 @@ export default{
     },
     mounted:function(){
 
+
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
@@ -127,9 +130,11 @@ export default{
 }
 </script>
 
+
 <template>
   <div>
     <div>
+
 
         <!--TODO:change the background to an opaque picture><!-->
     </div>
@@ -177,6 +182,8 @@ export default{
     </div>
   </div>
 </template>
+
+<style scoped>
 
 <style scoped>
 .logo{
@@ -264,6 +271,7 @@ export default{
 }
 .DownloadIcon{
     z-index: 101;
+    top: 12px;
     top: 12px;
     width: 36px;
     height: 36px;
@@ -365,3 +373,4 @@ export default{
     position: absolute;
 }
 </style>
+
