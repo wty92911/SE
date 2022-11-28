@@ -18,7 +18,7 @@ export default{
             currentMusicLyric:[],
 
 
-            musicLyric: "[00:00.000] 作词 : Kirsty刘瑾睿\n[00:01.000] 作曲 : Kirsty刘瑾睿\n[00:06.840]出品：网易音乐人 X 网易青云LAB\n[00:18.840]落叶无归根 单丝不成线\n[00:27.710]无所寄托 亦无心流浪\n",
+            musicLyric: "",
             lyric: {}, // 歌词枚举对象(需要在js拿到歌词写代码处理后, 按照格式保存到这个对象)
             curLyric: '', // 当前显示哪句歌词
             lastLy: '' ,// 记录当前播放歌词
@@ -27,23 +27,23 @@ export default{
 
 
     },
-    async created(){
-  //  // 获取歌曲详情, 和歌词方法
-  //     const res = await getSongByIdAPI({id:this.id})
-  //     this.songInfo = res.data.data[0];
+  //   async created(){
+  // //  // 获取歌曲详情, 和歌词方法
+  // //     const res = await getSongByIdAPI({id:this.id})
+  // //     this.songInfo = res.data.data[0];
 
-  //     // 获取歌曲详情
-  //     const musicInfo =await getMusicByIdAPI({ids:this.id});
-  //     this.musicInfo = musicInfo.data.songs[0];
+  // //     // 获取歌曲详情
+  // //     const musicInfo =await getMusicByIdAPI({ids:this.id});
+  // //     this.musicInfo = musicInfo.data.songs[0];
 
-  //     // 获取-并调用formatLyric方法, 处理歌词
-  //     const lyrContent  = await getLyricByIdAPI({id:this.id});
-  //     const lyricStr = lyrContent.data.lrc.lyric
-        this.lyric = this.formatLyric(this.musicLyric)
-        // 初始化完毕先显示零秒歌词
-        this.curLyric = this.lyric[0]
+  // //     // 获取-并调用formatLyric方法, 处理歌词
+  // //     const lyrContent  = await getLyricByIdAPI({id:this.id});
+  // //     const lyricStr = lyrContent.data.lrc.lyric
+  //       this.lyric = this.formatLyric(this.musicLyric)
+  //       // 初始化完毕先显示零秒歌词
+  //       this.curLyric = this.lyric[0]
 
-  },
+  // },
     methods:{
         changelike(){
             this.likeshow = !this.likeshow;
@@ -57,7 +57,11 @@ export default{
             (res) =>{
                 console.log(res);
                 this.musicLyric = res.data.lyric.musicLyric;
+                this.lyric = this.formatLyric(this.musicLyric)
+                // 初始化完毕先显示零秒歌词
+                this.curLyric = this.lyric[0]
             })
+
             //this.hot.push({'id': '865632948', 'name': '若把你', 'artists': ['Kirsty刘瑾睿'], 'url': 'http://music.163.com/song/media/outer/url?id=865632948.mp3', 'pic_url': 'http://p2.music.126.net/M877M2-VhWZiLPVFORf9iQ==/109951163401482434.jpg'});
         },
 
