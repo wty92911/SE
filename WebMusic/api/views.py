@@ -36,13 +36,11 @@ def getMusic(request):
 @require_http_methods(["GET","POST"])
 def getLyric(request):
     # print(request.method)
-    if request.body=="POST":
-        if request.body in mp:
-            return mp[request.body]
+    try:
         dt = json.loads(request.body)
         id = dt['id']
-    elif request.method=="GET":
-        id=request.GET.get("id")
+    except:
+        id = request.POST.get("id")
     # id=16607964
     # print(id)
     musicName=crawler.get_Music_name(id)
