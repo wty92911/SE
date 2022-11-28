@@ -46,7 +46,7 @@ def getLyric(request):
     # id=16607964
     # print(id)
     musicName=crawler.get_Music_name(id)
-    musicLyric=crawler.get_lyric(id).splitlines()
+    musicLyric=crawler.get_lyric(id)
     # print(type(musicLyric))
     res = {}
     res['lyric'] = {
