@@ -177,3 +177,4 @@ def dislikescreens(request):
     obj = models.screens.objects.get(music_id = t_music, screens_count = t_screen)
     obj.dislikes = obj.dislikes + 1
     obj.save()
+
