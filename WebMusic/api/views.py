@@ -152,14 +152,15 @@ def myLikes(request):
 
 @require_http_methods(["GET","POST"])
 def getComment(request):
-    dt = json.loads(request.body)
+    try:
+        dt = json.loads(request.body)
+    except:
+        dt = request.POST
     id = dt['id']
     musicid = id
-    gethtml = get_comment.get_response(0, 200, str(musicid))
-    data = get_comment.parse_return(gethtml)
-    for x in range(1, 100):
-        gethtml =get_comment.get_response(x, 200, str(musicid))
+    data = []
+    for x in range(0, 30):
+        gethtml =get_comment.get_response(x, 30, str(musicid))
         data1 = get_comment.parse_return(gethtml)
-        mindata = ChainMap(data, data1)
-        data = mindata
-    return JsonResponse(data)
+        data.append(data1)
+    return JsonResponse(data,safe=False)
