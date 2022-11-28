@@ -59,11 +59,12 @@ def getLyric(request):
     res = {}
     res['lyric'] = {
                     'id':id,
-                    'name':musicName,
-                    'lyric':[{
-                        'timeStamp':line[0],
-                        'content':line[1]
-                    }for line in lyricLines]
+                    'musicLyric':musicLyric,
+                    # 'name':musicName,
+                    # 'lyric':[{
+                    #     'timeStamp':line[0],
+                    #     'content':line[1]
+                    # }for line in lyricLines]
                     }
     # print(res)
     mp[request.body] = JsonResponse(res)
