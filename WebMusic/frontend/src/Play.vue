@@ -6,7 +6,6 @@ export default{
     components:{
     Animation,
     FontAwesomeIcon,
-    Lyric
 },
     data(){
         return{
@@ -19,11 +18,7 @@ export default{
             currentMusicLyric:[],
 
 
-            musicLyric: '[00:00.000] 作词 : 张军磊\
-                [00:01.000] 作曲 : 李亚洲\
-                [00:02.000] 编曲 : 李博\
-                [00:03.000] 制作人 : 李亚洲\
-                [00:29.98]风越过高高的山岗',
+            musicLyric: "[00:00.000] 作词 : Kirsty刘瑾睿\n[00:01.000] 作曲 : Kirsty刘瑾睿\n[00:06.840]出品：网易音乐人 X 网易青云LAB\n[00:18.840]落叶无归根 单丝不成线\n[00:27.710]无所寄托 亦无心流浪\n",
             lyric: {}, // 歌词枚举对象(需要在js拿到歌词写代码处理后, 按照格式保存到这个对象)
             curLyric: '', // 当前显示哪句歌词
             lastLy: '' ,// 记录当前播放歌词
@@ -44,9 +39,9 @@ export default{
   //     // 获取-并调用formatLyric方法, 处理歌词
   //     const lyrContent  = await getLyricByIdAPI({id:this.id});
   //     const lyricStr = lyrContent.data.lrc.lyric
-      this.lyric = this.formatLyric(this.musicLyric)
-       // 初始化完毕先显示零秒歌词
-      this.curLyric = this.lyric[0]
+        this.lyric = this.formatLyric(this.musicLyric)
+        // 初始化完毕先显示零秒歌词
+        this.curLyric = this.lyric[0]
 
   },
     methods:{
@@ -118,8 +113,6 @@ export default{
       }
     },
     mounted:function(){
-
-
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
@@ -146,7 +139,7 @@ export default{
     </div>
     <img class="cover" :src="cover" />
     <div class="lyric">
-
+      {{musicLyric}}
     </div>
     <div class="circleButtonLike" @click="changelike">
         <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
@@ -185,7 +178,7 @@ export default{
 
 <style scoped>
 
-<style scoped>
+
 .logo{
     z-index: 100;
     left: 100px;
