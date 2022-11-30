@@ -7,6 +7,7 @@ import { getComment } from './api/api';
 import { AVWaveform } from 'vue-audio-visual/dist/vue-audio-visual'
 import {AVLine} from 'vue-audio-visual/dist/vue-audio-visual'
 import {useAVBars} from 'vue-audio-visual/dist/vue-audio-visual'
+import {useAVCircle } from 'vue-audio-visual/dist/vue-audio-visual'
 import Player from '../src/Player.vue'
 export default{
     components:{
@@ -17,6 +18,7 @@ export default{
       AVLine,
       useAVBars,
       Player,
+      useAVCircle,
     },
     data(){
         return{
@@ -131,15 +133,6 @@ export default{
         }
       },
 
-      // 播放按钮 - 点击事件
-      audioStart() {
-        if (!this.playState) { // 如果状态为false
-          this.$refs.audio.play() // 调用audio标签的内置方法play可以继续播放声音
-        } else {
-          this.$refs.audio.pause() // 暂停audio的播放
-        }
-        this.playState = !this.playState // 点击设置对立状态
-      },
       lyricShow() {
         this.lyricshow = true;
       },
@@ -210,8 +203,10 @@ export default{
         console.log(this.$route.query.id);
         this.getlyric();
         console.log(this.musicId);
-        
-        }
+            
+        useAVCircle(this.$refs.audio,this.$refs.canvas,{ src:this.playUrl})
+    }
+
         
 }
 </script>
@@ -249,10 +244,12 @@ export default{
         <font-awesome-icon icon="fa-solid fa-share" />
     </div>
     <div class="player">
+         
         <div @click="lyricShow()">
           <p class="lrc" >{{ curLyric }}</p>
         </div>
-        <audio ref = "audio" preload = "true" :src="playUrl" @timeupdate = "timeupdate" controls="controls"></audio>
+        <audio ref = "audio" crossOrigin="anonymous" preload = "true" :src="playUrl" @timeupdate = "timeupdate" controls="controls"></audio>
+        <canvas ref="canvas" ></canvas>
     </div>
     <div class="alllyric" v-if="lyricshow">
       <font-awesome-icon @click="lyricHide()" class="closelyric" icon="fa-solid fa-circle-xmark" />
@@ -265,7 +262,7 @@ export default{
         <!-- {{currentMusicLyric}} -->
         <!-- {{musicLyric}} -->
       </div>
-        <Player :my-source="playUrl"></Player>
+        
     </div>
     <div class="simpleComment" @click="showcomment" v-if="!showComment">
         <div>
