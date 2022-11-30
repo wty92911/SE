@@ -30,6 +30,10 @@
           }
         )
       },
+      playMusic(index){
+
+         this.$router.push({name:'Play',query:{id: this.music[index].id, cover: this.music[index].pic_url, playUrl: this.music[index].url}});
+       },
     },
     mounted:function(){
       this.getsearch();
@@ -42,12 +46,13 @@
   }
 
 </script>
-  
+
 <template>
+
   
   <ShowSix :music="music" :userName="this.$route.query.userName"></ShowSix>
 </template>
-  
+
 
 <style scoped>
 @media (min-width: 1024px) {

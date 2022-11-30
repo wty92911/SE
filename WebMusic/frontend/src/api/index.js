@@ -2,6 +2,7 @@
 import Axios from "axios"
 const axiosInstance = Axios.create({
     withCredentials: false,
+    // baseURL : 'http://127.0.0.1:8000/api/',
     //baseURL : 'http://127.0.0.1:8000/api/',
     baseURL : 'http://47.94.92.103:80/api',
 });
