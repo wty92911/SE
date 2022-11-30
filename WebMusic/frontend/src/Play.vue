@@ -26,11 +26,11 @@ export default{
             likeshow:true,
             starshow:true,
             showComment:false,
-            comments:['123','456','789'],
-            commentators:['a','b','c'],
+            comments:[],
+            commentators:[],
+            test:{},
             index:0
         }
-        
     },
     methods:{
         changelike(){
@@ -55,6 +55,19 @@ export default{
         show(){
             console.log(this.$refs.foo);
         },
+        getComment() {
+            getComment(this.musicId).then(
+                (res) =>{
+                    console.log(res);
+                    for(var i = 0; i < 30; i++){
+                        this.comments.push(res.data.content);
+                    }
+                    for(var i = 0; i < 30; i++){
+                    this.commentators.push(res.data[i].用户名);
+                    }
+                }
+            )
+        },
         showcomment(){
             this.showComment = true;
         },
@@ -71,7 +84,8 @@ export default{
         },
         initindex(){
             this.index = 0
-        }
+        },
+        
     },
     mounted:function(){
        
@@ -79,6 +93,18 @@ export default{
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
         this.userName = this.$route.query.userName;
+        this.test = {"a":1};
+        getComment(this.musicId).then(
+            (res) =>{
+                console.log(res);
+                for(var i = 0; i < 30; i++){
+                    this.comments.push(res.data[i].content);
+                }
+                for(var i = 0; i < 30; i++){
+                    this.commentators.push(res.data[i].用户名);
+                }
+            }
+        )
         myLikes(this.userName,'queryid',this.musicId).then(
             (res) => {
                 console.log(res.data);
@@ -86,13 +112,10 @@ export default{
             }
         )
         console.log(this.playUrl);
-        console.log(this.$route.query.id);
+        console.log(this.musicId);
+        
         }
-        // getComment(this.musicId).then(
-        //     (res) =>{
-
-        //     }
-        // )
+        
 }
 </script>
   
@@ -353,9 +376,9 @@ export default{
 }
 .onecomment{
     z-index: 100;
-    left: 600px;
-    top: 60px;
-    width: 295px;
+    left: 0px;
+    top: 120px;
+    width: 1450px;
     height: 28px;
     font-size: 25px;
     text-align: center;
@@ -364,9 +387,9 @@ export default{
 }
 .onecommentator{
     z-index: 100;
-    left: 600px;
-    top: 30px;
-    width: 295px;
+    left: 0px;
+    top: 0px;
+    width: 1450px;
     height: 28px;
     font-size: 40px;
     text-align: center;
@@ -375,9 +398,9 @@ export default{
 }
 .firstcomment{
     z-index: 100;
-    left: 60px;
-    top: 60px;
-    width: 295px;
+    left: 5px;
+    top: 180px;
+    width: 400px;
     height: 28px;
     font-size: 25px;
     text-align: center;
@@ -386,13 +409,13 @@ export default{
 }
 .firstcommentators{
     z-index: 100;
-    left: 60px;
+    left: 0px;
     top: 30px;
-    width: 295px;
+    width: 408px;
     height: 28px;
     font-size: 40px;
     text-align: center;
     font-family: Microsoft Yahei;
-    position: relative;
+    position: absolute;
 }
 </style>
