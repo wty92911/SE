@@ -28,7 +28,7 @@ export default{
             userName:'',
             likeshow:true,
             starshow:true,
-            
+
             //  lyric
             lyricshow:false,
             currentMusicLyric:[],
@@ -37,7 +37,7 @@ export default{
             curLyric: '', // 当前显示哪句歌词
             lastLy: '' ,// 记录当前播放歌词
             playState: false, // 音乐播放状态(true暂停, false播放)
-            
+
             //  comments
             showComment:false,
             comments:[],
@@ -83,8 +83,8 @@ export default{
         changestar(){
             this.starshow = !this.starshow;
         },
-        
-        // lyric 
+
+        // lyric
         getlyric(){
             getLyric(this.$route.query.id).then(
             (res) =>{
@@ -139,7 +139,7 @@ export default{
       lyricHide() {
         this.lyricshow = false;
       },
-      
+
       // comments
       show(){
           console.log(this.$refs.foo);
@@ -203,11 +203,9 @@ export default{
         console.log(this.$route.query.id);
         this.getlyric();
         console.log(this.musicId);
-            
         useAVCircle(this.$refs.audio,this.$refs.canvas,{ src:this.playUrl})
     }
 
-        
 }
 </script>
 
@@ -250,6 +248,7 @@ export default{
         </div>
         <audio ref = "audio" crossOrigin="anonymous" preload = "true" :src="playUrl" @timeupdate = "timeupdate" controls="controls"></audio>
         <canvas ref="canvas" ></canvas>
+
     </div>
     <div class="alllyric" v-if="lyricshow">
       <font-awesome-icon @click="lyricHide()" class="closelyric" icon="fa-solid fa-circle-xmark" />
@@ -287,7 +286,7 @@ export default{
             </div>
         </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -440,6 +439,15 @@ export default{
     position: absolute;
 
 }
+.audioPlayer{
+    z-index:101;
+    left: 50px;
+    top: 80px;
+    width: 0px;
+    height: 90px;
+    text-align: center;
+    position: absolute;
+}
 .lrc {
   font-size: 20px;
   color: rgb(114, 217, 23);
@@ -448,7 +456,7 @@ export default{
 }
 .alllyric{
     z-index: 101;
-    left: 760px;
+    left: 800px;
     top: 226px;
     width: 408px;
     height: 460px;
