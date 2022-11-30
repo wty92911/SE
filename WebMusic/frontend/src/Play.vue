@@ -2,6 +2,7 @@
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { myLikes } from './api/api';
+import { getComment } from './api/api';
 import { AVWaveform } from 'vue-audio-visual/dist/vue-audio-visual'
 import {AVLine} from 'vue-audio-visual/dist/vue-audio-visual'
 import {useAVBars} from 'vue-audio-visual/dist/vue-audio-visual'
@@ -24,8 +25,12 @@ export default{
             userName:'',
             likeshow:true,
             starshow:true,
+            showComment:false,
+            comments:[],
+            commentators:[],
+            test:{},
+            index:0
         }
-        
     },
     methods:{
         changelike(){
@@ -49,7 +54,38 @@ export default{
         },
         show(){
             console.log(this.$refs.foo);
-        }
+        },
+        getComment() {
+            getComment(this.musicId).then(
+                (res) =>{
+                    console.log(res);
+                    for(var i = 0; i < 30; i++){
+                        this.comments.push(res.data.content);
+                    }
+                    for(var i = 0; i < 30; i++){
+                    this.commentators.push(res.data[i].用户名);
+                    }
+                }
+            )
+        },
+        showcomment(){
+            this.showComment = true;
+        },
+        hidecomment(){
+            this.showComment = false;
+        },
+        lastcomment(){
+            if(this.index > 0)
+                this.index = this.index - 1;
+        },
+        nextcomment(){
+            if(this.index < (this.comments.length - 1))
+            this.index = this.index + 1;
+        },
+        initindex(){
+            this.index = 0
+        },
+        
     },
     mounted:function(){
        
@@ -57,6 +93,18 @@ export default{
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
         this.userName = this.$route.query.userName;
+        this.test = {"a":1};
+        getComment(this.musicId).then(
+            (res) =>{
+                console.log(res);
+                for(var i = 0; i < 30; i++){
+                    this.comments.push(res.data[i].content);
+                }
+                for(var i = 0; i < 30; i++){
+                    this.commentators.push(res.data[i].用户名);
+                }
+            }
+        )
         myLikes(this.userName,'queryid',this.musicId).then(
             (res) => {
                 console.log(res.data);
@@ -64,8 +112,10 @@ export default{
             }
         )
         console.log(this.playUrl);
-        console.log(this.$route.query.id);
+        console.log(this.musicId);
+        
         }
+        
 }
 </script>
   
@@ -82,8 +132,6 @@ export default{
         <Animation />
     </div>
     <img class="cover" :src="cover" />
-    <div class="lyric">
-    </div>
     <div class="circleButtonLike" @click="changelike">
         <font-awesome-icon icon = "far fa-heart" v-if="!likeshow"/>
         <font-awesome-icon icon = "fas fa-heart" v-if="likeshow"/>
@@ -101,7 +149,30 @@ export default{
     <div class="player">
         <Player :my-source="playUrl"></Player>
     </div>
-
+    <div class="simpleComment" @click="showcomment" v-if="!showComment">
+        <div>
+            <div class="firstcommentators">
+                {{this.commentators[0]}}
+            </div>
+            <div class="firstcomment">
+                {{this.comments[0]}}
+            </div>
+        </div>
+    </div>
+    <div class="comments" v-if="showComment">
+        <font-awesome-icon @click="hidecomment() & initindex()" class = "closeComments" icon="fa-solid fa-circle-xmark" />
+        <font-awesome-icon @click="nextcomment()" class="righticon" icon="fa-solid fa-circle-chevron-right" />
+        <font-awesome-icon @click="lastcomment()" class="lefticon" icon="fa-solid fa-circle-chevron-left" />
+        <div>
+            <div class="onecommentator">
+                {{this.commentators[index]}}
+            </div>
+            <div class="onecomment">
+                {{this.comments[index]}}
+            </div>
+        </div>
+    </div>
+    
   </div>
 </template>
   
@@ -161,17 +232,6 @@ export default{
     top: 226px;
     width: 330px;
     height: 330px;
-    position: absolute;
-}
-.lyric{
-    z-index: 101;
-    left: 763px;
-    top: 226px;
-    width: 408px;
-    height: 460px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
 }
 .LikeIcon{
@@ -260,7 +320,102 @@ export default{
     height: 60px;
     text-align: center;
     position: absolute;
-   
+}
+.simpleComment{
+    z-index: 101;
+    left: 763px;
+    top: 226px;
+    width: 408px;
+    height: 460px;
+    line-height: 50px;
+    text-align: center;
+    border: 2px solid rgb(124, 124, 124);
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.675);
+}
+.comments{
+    z-index: 101;
+    left: 100px;
+    top: 210px;
+    width: 1450px;
+    height: 500px;
+    line-height: 100px;
+    text-align: center;
+    border: 1px solid rgb(117, 117, 117);
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.675);
+}
+.closeComments{
+    right: 10px;
+    top: 10px;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+}
+.righticon{
+    z-index: 101;
+    left: 1350px;
+    top: 225px;
+    width: 60px;
+    height: 60px;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    font-size: 40px;
+}
+.lefticon{
+    z-index: 101;
+    left: 50px;
+    top: 225px;
+    width: 60px;
+    height: 60px;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    font-size: 40px;
+}
+.onecomment{
+    z-index: 100;
+    left: 0px;
+    top: 120px;
+    width: 1450px;
+    height: 28px;
+    font-size: 25px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.onecommentator{
+    z-index: 100;
+    left: 0px;
+    top: 0px;
+    width: 1450px;
+    height: 28px;
+    font-size: 40px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.firstcomment{
+    z-index: 100;
+    left: 5px;
+    top: 180px;
+    width: 400px;
+    height: 28px;
+    font-size: 25px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.firstcommentators{
+    z-index: 100;
+    left: 0px;
+    top: 30px;
+    width: 408px;
+    height: 28px;
+    font-size: 40px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: absolute;
 }
 </style>
-  

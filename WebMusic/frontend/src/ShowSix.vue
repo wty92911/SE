@@ -25,7 +25,7 @@
         },
         nextPage(){
             console.log(this.music.length);
-           if(this.pageNumber * 6 + 6 < this.music.length){
+            if(this.pageNumber * 6 + 6 < this.music.length){
             this.pageNumber += 1;
             console.log(this.pageNumber);
            }
