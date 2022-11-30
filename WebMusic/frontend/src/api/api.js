@@ -9,3 +9,5 @@ export const getHotlist = () => {return axios.post('getHotlist')};
 export const mySignIn = (username,password) =>{return axios.post('mySignIn',{'username':username,'password':password})};
 export const mySignUp = (username,password) =>{return axios.post('mySignUp',{'username':username,'password':password})};
 export const getLyric = (id) => {return axios.post('getLyric', {'id':id})};
+export const myLikes = (username,opt,id) => {return axios.post('myLikes',{'username':username,'opt':opt,'id':id})};
+export const getComment = (id) => {return axios.post('getComment',{"id":id})}
