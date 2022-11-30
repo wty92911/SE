@@ -30,7 +30,7 @@ export default{
         },
         playMusic(index){
          
-          this.$router.push({name:'Play',query:{id: this.hot[index].id, cover: this.hot[index].pic_url, playUrl: this.hot[index].url}});
+          this.$router.push({name:'Play',query:{userName:this.$route.query.userName,id: this.hot[index].id, cover: this.hot[index].pic_url, playUrl: this.hot[index].url}});
         }
     },
     mounted:function(){

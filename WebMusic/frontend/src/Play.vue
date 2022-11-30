@@ -2,30 +2,47 @@
 import Animation from './components/Animation.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getLyric } from './api/api';
+import { myLikes } from './api/api';
+import { getComment } from './api/api';
+import { AVWaveform } from 'vue-audio-visual/dist/vue-audio-visual'
+import {AVLine} from 'vue-audio-visual/dist/vue-audio-visual'
+import {useAVBars} from 'vue-audio-visual/dist/vue-audio-visual'
+import Player from '../src/Player.vue'
 export default{
     components:{
-    Animation,
-    FontAwesomeIcon,
-},
+      Animation,
+      FontAwesomeIcon,
+      myLikes,
+      AVWaveform,
+      AVLine,
+      useAVBars,
+      Player,
+    },
     data(){
         return{
             musicId: '',
             cover: '',
             playUrl: '',
+            userName:'',
             likeshow:true,
             starshow:true,
+            
+            //  lyric
             lyricshow:false,
             currentMusicLyric:[],
-
-
             musicLyric: "",
             lyric: {}, // 歌词枚举对象(需要在js拿到歌词写代码处理后, 按照格式保存到这个对象)
             curLyric: '', // 当前显示哪句歌词
             lastLy: '' ,// 记录当前播放歌词
             playState: false, // 音乐播放状态(true暂停, false播放)
+            
+            //  comments
+            showComment:false,
+            comments:[],
+            commentators:[],
+            test:{},
+            index:0
         }
-
-
     },
   //   async created(){
   // //  // 获取歌曲详情, 和歌词方法
@@ -46,12 +63,26 @@ export default{
   // },
     methods:{
         changelike(){
+            if(this.likeshow){
+                myLikes(this.userName,'del',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }else{
+                myLikes(this.userName,'add',this.musicId).then(
+                    (res) =>{
+                        console.log(res.data);
+                    }
+                )
+            }
             this.likeshow = !this.likeshow;
         },
         changestar(){
             this.starshow = !this.starshow;
         },
-
+        
+        // lyric 
         getlyric(){
             getLyric(this.$route.query.id).then(
             (res) =>{
@@ -115,15 +146,73 @@ export default{
       lyricHide() {
         this.lyricshow = false;
       }
+      
+      // comments
+      show(){
+          console.log(this.$refs.foo);
+      },
+      getComment() {
+          getComment(this.musicId).then(
+              (res) =>{
+                  console.log(res);
+                  for(var i = 0; i < 30; i++){
+                      this.comments.push(res.data.content);
+                  }
+                  for(var i = 0; i < 30; i++){
+                  this.commentators.push(res.data[i].用户名);
+                  }
+              }
+          )
+      },
+      showcomment(){
+          this.showComment = true;
+      },
+      hidecomment(){
+          this.showComment = false;
+      },
+      lastcomment(){
+          if(this.index > 0)
+              this.index = this.index - 1;
+      },
+      nextcomment(){
+          if(this.index < (this.comments.length - 1))
+          this.index = this.index + 1;
+      },
+      initindex(){
+          this.index = 0
+      },
+
     },
     mounted:function(){
         this.musicId = this.$route.query.id;
         this.cover = this.$route.query.cover;
         this.playUrl = this.$route.query.playUrl;
+        this.userName = this.$route.query.userName;
+        this.test = {"a":1};
+        getComment(this.musicId).then(
+            (res) =>{
+                console.log(res);
+                for(var i = 0; i < 30; i++){
+                    this.comments.push(res.data[i].content);
+                }
+                for(var i = 0; i < 30; i++){
+                    this.commentators.push(res.data[i].用户名);
+                }
+            }
+        )
+        myLikes(this.userName,'queryid',this.musicId).then(
+            (res) => {
+                console.log(res.data);
+                this.likeshow = res.data.exist;
+            }
+        )
         console.log(this.playUrl);
         console.log(this.$route.query.id);
         this.getlyric();
-    }
+        console.log(this.musicId);
+        
+        }
+        
 }
 </script>
 
@@ -146,8 +235,8 @@ export default{
 
     </div>
     <div class="circleButtonLike" @click="changelike">
-        <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
-        <font-awesome-icon icon = "fas fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "far fa-heart" v-if="!likeshow"/>
+        <font-awesome-icon icon = "fas fa-heart" v-if="likeshow"/>
     </div>
     <div class="circleButtonStar" @click="changestar">
         <font-awesome-icon icon = "far fa-star" v-if="starshow"/>
@@ -176,7 +265,32 @@ export default{
         <!-- {{currentMusicLyric}} -->
         <!-- {{musicLyric}} -->
       </div>
+        <Player :my-source="playUrl"></Player>
     </div>
+    <div class="simpleComment" @click="showcomment" v-if="!showComment">
+        <div>
+            <div class="firstcommentators">
+                {{this.commentators[0]}}
+            </div>
+            <div class="firstcomment">
+                {{this.comments[0]}}
+            </div>
+        </div>
+    </div>
+    <div class="comments" v-if="showComment">
+        <font-awesome-icon @click="hidecomment() & initindex()" class = "closeComments" icon="fa-solid fa-circle-xmark" />
+        <font-awesome-icon @click="nextcomment()" class="righticon" icon="fa-solid fa-circle-chevron-right" />
+        <font-awesome-icon @click="lastcomment()" class="lefticon" icon="fa-solid fa-circle-chevron-left" />
+        <div>
+            <div class="onecommentator">
+                {{this.commentators[index]}}
+            </div>
+            <div class="onecomment">
+                {{this.comments[index]}}
+            </div>
+        </div>
+    </div>
+    
   </div>
 </template>
 
@@ -238,17 +352,6 @@ export default{
     top: 226px;
     width: 330px;
     height: 330px;
-    position: absolute;
-}
-.lyric{
-    z-index: 101;
-    left: 763px;
-    top: 226px;
-    width: 408px;
-    height: 460px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
 }
 .LikeIcon{
@@ -370,5 +473,103 @@ export default{
     height: 36px;
     position: absolute;
 }
-</style>
 
+
+.simpleComment{
+    z-index: 101;
+    left: 763px;
+    top: 226px;
+    width: 408px;
+    height: 460px;
+    line-height: 50px;
+    text-align: center;
+    border: 2px solid rgb(124, 124, 124);
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.675);
+}
+.comments{
+    z-index: 101;
+    left: 100px;
+    top: 210px;
+    width: 1450px;
+    height: 500px;
+    line-height: 100px;
+    text-align: center;
+    border: 1px solid rgb(117, 117, 117);
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.675);
+}
+.closeComments{
+    right: 10px;
+    top: 10px;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+}
+.righticon{
+    z-index: 101;
+    left: 1350px;
+    top: 225px;
+    width: 60px;
+    height: 60px;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    font-size: 40px;
+}
+.lefticon{
+    z-index: 101;
+    left: 50px;
+    top: 225px;
+    width: 60px;
+    height: 60px;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    font-size: 40px;
+}
+.onecomment{
+    z-index: 100;
+    left: 0px;
+    top: 120px;
+    width: 1450px;
+    height: 28px;
+    font-size: 25px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.onecommentator{
+    z-index: 100;
+    left: 0px;
+    top: 0px;
+    width: 1450px;
+    height: 28px;
+    font-size: 40px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.firstcomment{
+    z-index: 100;
+    left: 5px;
+    top: 180px;
+    width: 400px;
+    height: 28px;
+    font-size: 25px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: relative;
+}
+.firstcommentators{
+    z-index: 100;
+    left: 0px;
+    top: 30px;
+    width: 408px;
+    height: 28px;
+    font-size: 40px;
+    text-align: center;
+    font-family: Microsoft Yahei;
+    position: absolute;
+}
+</style>
