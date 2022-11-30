@@ -143,7 +143,7 @@ export default{
     </div>
     <img class="cover" :src="cover" />
     <div class="lyric">
-      {{musicLyric}}
+
     </div>
     <div class="circleButtonLike" @click="changelike">
         <font-awesome-icon icon = "far fa-heart" v-if="likeshow"/>
@@ -355,11 +355,12 @@ export default{
     line-height: 20px;
     text-align: center;
     text-indent: 0rem;
-    color: rgba(106, 26, 219, 0.992);
+    color: rgba(251, 251, 251, 0.992);
     border: 1px solid rgba(187, 187, 187, 1);
     position: absolute;
     background-color: rgba(240, 248, 255, 0.507);
     font-family: 方正综艺体-标准;
+    overflow-y:scroll
 }
 .closelyric{
     z-index: 101;
