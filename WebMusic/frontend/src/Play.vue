@@ -145,7 +145,7 @@ export default{
       },
       lyricHide() {
         this.lyricshow = false;
-      },
+      }
 
       // comments
       show(){
