@@ -7,4 +7,5 @@ urlpatterns = [
     path('mySignIn',views.mySignIn,name='mySignIn'),
     path('mySignUp',views.mySignUp,name = 'mySignUp'),
     path('myLikes',views.myLikes,name = 'myLikes'),
+    path('getComment',views.getComment,name='getComment'),
 ]
