@@ -43,6 +43,31 @@ def getMusic(request):
     return JsonResponse(res)
 
 @require_http_methods(["GET","POST"])
+def getLyric(request):
+    # print(request.method)
+    if(request.body in mp):
+        return mp[request.body]
+    try:
+        dt = json.loads(request.body)
+        id = dt['id']
+    except:
+        id = request.POST.get("id")
+    # id=16607964
+    # print(id)
+    musicName=crawler.get_Music_name(id)
+    musicLyric=crawler.get_lyric(id)
+    # print(type(musicLyric))
+    res = {}
+    res['lyric'] = {
+                    'id':id,
+                    'musicLyric':musicLyric,
+                    }
+    # print(res)
+    mp[request.body] = JsonResponse(res)
+    return JsonResponse(res)
+
+
+@require_http_methods(["GET","POST"])
 def getHotlist(request):
     print(request.body)
     if request.body in mp:
@@ -119,6 +144,7 @@ def mySignUp(request):
     res['auth'] = False
     res['message'] = 'error username or password'
     return JsonResponse(res)
+    
 @require_http_methods(["GET","POST"])
 def myLikes(request):
     print(request.body)
