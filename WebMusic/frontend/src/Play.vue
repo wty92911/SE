@@ -171,9 +171,6 @@ export default{
           if(this.index < (this.comments.length - 1))
           this.index = this.index + 1;
       },
-      initindex(){
-          this.index = 0
-      },
 
     },
     mounted:function(){
@@ -263,18 +260,18 @@ export default{
       </div>
         
     </div>
-    <div class="simpleComment" @click="showcomment" v-if="!showComment">
+    <div class="simpleComment" @click="showcomment() & lyricHide()" v-if="(!showComment & !lyricshow)">
         <div>
             <div class="firstcommentators">
-                {{this.commentators[0]}}
+                {{this.commentators[index]}}
             </div>
             <div class="firstcomment">
-                {{this.comments[0]}}
+                {{this.comments[index]}}
             </div>
         </div>
     </div>
     <div class="comments" v-if="showComment">
-        <font-awesome-icon @click="hidecomment() & initindex()" class = "closeComments" icon="fa-solid fa-circle-xmark" />
+        <font-awesome-icon @click="hidecomment()" class = "closeComments" icon="fa-solid fa-circle-xmark" />
         <font-awesome-icon @click="nextcomment()" class="righticon" icon="fa-solid fa-circle-chevron-right" />
         <font-awesome-icon @click="lastcomment()" class="lefticon" icon="fa-solid fa-circle-chevron-left" />
         <div>
