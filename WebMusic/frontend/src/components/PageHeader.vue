@@ -65,8 +65,8 @@ export default{
         <div class="signin" @click="showsign()">
             {{userName}}
         </div>
-        <div>
-            123
+        <div class="headPortrait">
+            <img class="logo" src="../assets/HomePage/logo.png" />
         </div>
         <font-awesome-icon @click="showstars()" v-if="!showSignIn" class="stars" icon="fa-solid fa-star-half-stroke" />
         <!--修改登录注册 美观点-->
@@ -168,6 +168,16 @@ export default{
     font-family: Microsoft Yahei;
     color: rgb(44, 40, 40);
     
+}
+.headPortrait{
+    z-index: 100;
+    left: 1160px;
+    top: 82px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    position: fixed;
+    font-size: 5px;
 }
 .stars{
     z-index: 100;
