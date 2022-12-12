@@ -65,6 +65,9 @@ export default{
         <div class="signin" @click="showsign()">
             {{userName}}
         </div>
+        <div>
+            123
+        </div>
         <font-awesome-icon @click="showstars()" v-if="!showSignIn" class="stars" icon="fa-solid fa-star-half-stroke" />
         <!--修改登录注册 美观点-->
         
