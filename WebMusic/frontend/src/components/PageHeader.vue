@@ -66,7 +66,7 @@ export default{
             {{userName}}
         </div>
         <div class="headPortrait">
-            <img class="logo" src="../assets/HomePage/logo.png" />
+            <img src="../assets/搜索/头像.png" />
         </div>
         <font-awesome-icon @click="showstars()" v-if="!showSignIn" class="stars" icon="fa-solid fa-star-half-stroke" />
         <!--修改登录注册 美观点-->
@@ -171,8 +171,8 @@ export default{
 }
 .headPortrait{
     z-index: 100;
-    left: 1160px;
-    top: 82px;
+    left: 1175px;
+    top: 55px;
     width: 100px;
     height: 50px;
     text-align: center;
